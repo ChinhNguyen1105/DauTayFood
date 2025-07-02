@@ -1,0 +1,37 @@
+.header {
+    position: fixed;
+    /* Giúp header dính trên cùng */
+    top: 0;
+    /* Sát mép trên */
+    left: 0;
+    width: 100%;
+    height: 77px;
+    /* Chiều ngang 100% */
+    background-color: rgba(255, 130, 130, 1);
+    z-index: 1000;
+    /* Đảm bảo header nổi lên trên các phần khác */
+    display: flex;
+    /* Bật chế độ Flexbox */
+    justify-content: space-between;
+    /* Phân chia hai đầu (Logo trái, menu phải) */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header-left img {
+    position: absolute;
+    top: 0;
+    height: 130%;
+    width: auto;
+}
+
+/* ...existing code... */
+
+.header-left img,
+.header-left svg {
+    filter: brightness(0) saturate(100%);
+    /* Logo sẽ chuyển thành màu đen */
+}
+
+/* ...existing code... */
