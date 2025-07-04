@@ -1,0 +1,51 @@
+.product-card {
+    background-color: #D4ECE0;
+    /* xanh nhạt */
+    width: 220px;
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+}
+
+.product-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.product-name {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 12px 0;
+    color: #222;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgb(255, 66, 66);
+}
+
+.try-btn {
+    background-color: #ff7b8a;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.try-btn:hover {
+    background-color: #ff5c74;
+}

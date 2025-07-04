@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 import { FaShoppingCart, FaSearch, FaUserCircle } from 'react-icons/fa';
-import logo from '../assets/logo.png';
+import logo from '../../assets/logo.png';
 
 const Header = () => {
     return (
