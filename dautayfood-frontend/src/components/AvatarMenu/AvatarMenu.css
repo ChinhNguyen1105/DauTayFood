@@ -1,0 +1,75 @@
+/* AvatarMenu.css */
+.avatar-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px #0001;
+    transition: box-shadow 0.2s;
+}
+
+.avatar-img:hover {
+    box-shadow: 0 4px 16px #0002;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 52px;
+    right: 0;
+    min-width: 160px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px #0002;
+    z-index: 100;
+    padding: 8px 0;
+    animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mũi tên */
+.dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    right: 18px;
+    border-width: 0 10px 12px 10px;
+    border-style: solid;
+    border-color: transparent transparent #ffffff transparent;
+    filter: drop-shadow(0 -2px 2px #0001);
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #222;
+    transition: background 0.15s;
+    font-size: 16px;
+}
+
+.dropdown-menu li:hover {
+    background: #ffe0e6;
+    color: #e94e77;
+}

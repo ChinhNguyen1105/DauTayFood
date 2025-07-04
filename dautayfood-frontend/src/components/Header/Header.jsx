@@ -2,6 +2,8 @@ import React from 'react';
 import './Header.css';
 import { FaShoppingCart, FaSearch, FaUserCircle } from 'react-icons/fa';
 import logo from '../../assets/logo.png';
+import AvatarMenu from '../../components/AvatarMenu/AvatarMenu';
+import SearchBox from "../SearchBox/SearchBox";
 
 const Header = () => {
     return (
@@ -22,13 +24,12 @@ const Header = () => {
                     </li>
                 </ul>
                 <div className="search_box">
-                    <input type="text" placeholder="Vietnamese stir fried morning glory...." />
-                    <button><FaSearch /></button>
+                    <SearchBox />
                 </div>
                 {/* Đăng nhập */}
                 <div className="regist">
                     <span>Đăng ký - Đăng nhập </span>
-                    <div id='avatar'> <FaUserCircle size={40} /></div>
+                    <div id='avatar'><AvatarMenu /> </div>
                 </div>
             </div>
         </header >

@@ -75,36 +75,6 @@
     transition: 0.2s;
 }
 
-.search_box input {
-    background: #fff;
-    border: none;
-    border-radius: 20px 0 0 20px;
-    height: 38px;
-    padding: 0 16px;
-    width: 350px;
-    color: #222;
-    font-size: 16px;
-    outline: none;
-}
-
-.search_box button {
-    background: #454545;
-    border: none;
-    border-radius: 0 20px 20px 0;
-    color: rgb(255, 255, 255);
-    height: 38px;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* border-left: 1px solid #ddd; */
-}
-
-.search_box button:hover {
-    background: #585858;
-}
-
 .regist {
     display: flex;
     align-items: center;

@@ -1,7 +1,7 @@
 .product-card {
-    background-color: #D4ECE0;
+    background: rgba(212, 236, 224, 1);
     /* xanh nhạt */
-    width: 220px;
+    width: 250px;
     border-radius: 16px;
     padding: 16px;
     text-align: center;
@@ -34,18 +34,11 @@
     color: rgb(255, 66, 66);
 }
 
-.try-btn {
-    background-color: #ff7b8a;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 12px;
-    font-size: 0.95rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.try-btn:hover {
-    background-color: #ff5c74;
+.ButtonTry {
+    width: 212.63229370117188;
+    height: 44.510597229003906;
+    top: 410.12px;
+    left: 64px;
+    border-radius: 10px;
+    opacity: 1;
 }

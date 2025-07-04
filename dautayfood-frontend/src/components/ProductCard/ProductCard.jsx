@@ -1,14 +1,15 @@
 import './ProductCard.css'
+import ButtonTry from "../ButtonTry/ButtonTry";
 
-function ProductCard1({ name, image, price }) {
+function ProductCard({ name, image, price }) {
     return (
         <div className="product-card">
             <img src={image} alt={name} className="product-img" />
             <h3 className='product-price'>{price}</h3>
             <h3 className="product-name">{name}</h3>
-            <button className="try-btn">Thử ngay</button>
+            <div className='ButtonTry'><ButtonTry onClick={() => alert("Bạn đã chọn thử ngay!")}>Thử ngay</ButtonTry></div>
         </div>
     );
 }
 
-export default ProductCard1;
+export default ProductCard;

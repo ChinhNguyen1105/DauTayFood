@@ -4,7 +4,7 @@ import Header from './components/Header/Header.jsx'
 import Footer from './components/Footer/Footer.jsx'
 import ProductCard from './components/ProductCard/ProductCard.jsx'
 import tcdd from './assets/tran-chau-duong-den.jpg'
-
+import BigProductCard from './components/BigProductCard/BigProductCard.jsx'
 
 function AboutUs() {
   const [count, setCount] = useState(0)
@@ -33,6 +33,7 @@ function AboutUs() {
             image={tcdd}
             price={'30.000đ'}
           />
+          <BigProductCard />
 
         </p>
         {/* Thêm nội dung chính ở đây */}

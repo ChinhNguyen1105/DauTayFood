@@ -15,7 +15,6 @@ const Footer = () => {
                 <div className="footer-phone">Số điện thoại: <b>0971-391-833</b></div>
             </div>
             <div className="footer-main">
-
                 <div className="footer-links">
                     <ul>
                         <li>Câu hỏi thường gặp</li>
@@ -33,7 +32,6 @@ const Footer = () => {
                         <li>Thông tin liên hệ</li>
                     </ul>
                 </div>
-
             </div>
             <div className="footer-info">
                 <div>Email: HotroDauTayFood.vn</div>
