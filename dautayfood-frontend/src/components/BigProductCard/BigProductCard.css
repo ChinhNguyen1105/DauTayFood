@@ -7,7 +7,7 @@
     gap: 40px;
     align-items: flex-start;
     max-width: 900px;
-    margin: 32px auto;
+    height: 470.6px;
     border: 2px solid #1976d2;
 }
 
@@ -73,7 +73,10 @@
 
 .big-product-actions {
     display: flex;
+    justify-content: space-between;
     gap: 16px;
+    margin-top: 15px;
+
 }
 
 /* Responsive */

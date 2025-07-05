@@ -10,9 +10,17 @@ const BigProductCard = ({
     desc = "Bông lan mềm mịn kết hợp vị béo ngậy của sốt phô mai, chà bông mặn và trứng muối bùi bùi – món ăn vặt “quốc dân” khiến ai ăn thử cũng mê! loremmmmmmmmmmmmmmmmmmmmmmmmm",
     price = "55k",
     rating = 4.5,
-    sold = "1.7k"
+    sold = "1.7k",
 }) => {
     const [showDetail, setShowDetail] = useState(false);
+
+    const handleOpenDetail = () => {
+        setShowDetail(true);
+    };
+
+    const handleCloseDetail = () => {
+        setShowDetail(false);
+    };
 
     return (
         <>
@@ -29,18 +37,23 @@ const BigProductCard = ({
                     <p className="big-product-desc">{desc}</p>
                     <div className="big-product-price">Giá bán: <span>{price}</span></div>
                     <div className="big-product-actions">
-                        <ButtonTry onClick={() => setShowDetail(true)}>Thử ngay</ButtonTry>
+                        <ButtonTry onClick={handleOpenDetail} />
                         <ButtonCart onClick={() => alert("Đã thêm vào giỏ hàng!")}>Thêm vào giỏ hàng</ButtonCart>
                     </div>
                 </div>
             </div>
+
             {showDetail && (
-                <ProductDetail
-                    image={image}
-                    name={name}
-                    desc={desc}
-                // Có thể truyền thêm props khác nếu cần
-                />
+                <div className="overlay">
+                    <div className="detail-box">
+                        <ProductDetail
+                            image={image}
+                            name={name}
+                            desc={desc}
+                            onClose={handleCloseDetail}
+                        />
+                    </div>
+                </div>
             )}
         </>
     );

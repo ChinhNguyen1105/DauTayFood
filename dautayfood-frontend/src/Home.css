@@ -1,0 +1,124 @@
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #191919;
+}
+
+.app-container {
+  background: #222;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+main {
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1;
+  /* XÓA padding-top để tiêu đề sát banner */
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Hero section */
+.hero-section {
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+/* Products Section */
+.products-section {
+  position: relative;
+  margin-top: 0;
+}
+
+.section1-title {
+  position: relative;
+  background: rgba(219, 255, 203, 1);
+  padding: 10px;
+  text-align: center;
+  margin-top: -20px;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 60px;
+  padding: 40px;
+}
+
+/* Featured Section */
+.featured-section {
+  margin-top: 40px;
+}
+
+.section2-title {
+  position: relative;
+  background: rgba(219, 255, 203, 1);
+  padding: 10px;
+  border-radius: 0 0 16px 16px;
+  text-align: center;
+  margin-top: -40px;
+}
+
+.featured-product {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.featured-image {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 24px;
+  height: fit-content;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* nền mờ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+
+  .products-grid,
+  .featured-image {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .big-product-card {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 95vw;
+    max-width: 420px;
+  }
+
+  .big-product-card img {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}

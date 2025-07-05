@@ -1,10 +1,14 @@
-import React from "react";
-import "./ButtonTry.css";
+import './ButtonTry.css'
+import React from 'react'
 
-const ButtonTry = ({ onClick, children = "Thử ngay" }) => (
-  <button className="btn-try" onClick={onClick}>
-    {children}
-  </button>
-);
+const button = ({ onClick }) => {
 
-export default ButtonTry;
+  return (
+
+    <button className="form-button" onClick={onClick}>
+      mua ngay
+    </button>
+
+  );
+}
+export default button;

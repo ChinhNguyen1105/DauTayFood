@@ -4,10 +4,8 @@
     font-weight: bold;
     font-size: 1.1rem;
     border: none;
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 12px 32px;
-    margin-top: 18px;
-    margin-left: 83px;
     cursor: pointer;
     transition: background 0.2s;
     box-shadow: 0 2px 8px #0001;
