@@ -1,0 +1,253 @@
+/* Hero Section Styles */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    top: -20px;
+}
+
+/* Background Container */
+.hero-background-container {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Individual Background Images */
+.hero-background {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: all 1s ease-in-out;
+}
+
+.hero-background.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Hero Overlay */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+/* Hero Content */
+.hero-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: white;
+    padding: 0 1rem;
+}
+
+.hero-text-container {
+    text-align: center;
+    max-width: 64rem;
+    margin: 0 auto;
+}
+
+/* Typography */
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Countdown Section */
+.countdown-section {
+    margin-bottom: 2rem;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.time-digit {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.time-separator {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Promo Button */
+.promo-button {
+    background: linear-gradient(135deg, #4cffea, #ff4949);
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+.promo-button:hover {
+    background: linear-gradient(135deg, #ff7272, #ff6565);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Slide Indicators */
+.slide-indicators {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.75rem;
+}
+
+.slide-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slide-dot:hover {
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.slide-dot.active {
+    background: white;
+    transform: scale(1.25);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDelay {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDelay2 {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-out;
+}
+
+.animate-fade-in-delay {
+    animation: fadeInDelay 1s ease-out 0.3s both;
+}
+
+.animate-fade-in-delay-2 {
+    animation: fadeInDelay2 1s ease-out 0.6s both;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .time-digit {
+        font-size: 1.5rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .time-separator {
+        font-size: 1.5rem;
+    }
+
+    .promo-button {
+        padding: 0.5rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero-title {
+        font-size: 3.75rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+
+    .time-digit {
+        font-size: 2.25rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .time-separator {
+        font-size: 2.25rem;
+    }
+}

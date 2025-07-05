@@ -13,15 +13,9 @@ const Header = () => {
                     <img src={logo} alt="Logo" className='logo' />
                 </a>
                 <ul className='nav'>
-                    <li>
-                        <a href="#">Về chúng tôi</a>
-                    </li>
-                    <li>
-                        <a href="#">Giỏ hàng</a>
-                    </li>
-                    <li>
-                        <a href="#">Menu</a>
-                    </li>
+                    <li><a href="#">Về chúng tôi</a></li>
+                    <li><a href="#">Giỏ hàng</a></li>
+                    <li><a href="#">Menu</a></li>
                 </ul>
                 <div className="search_box">
                     <SearchBox />
