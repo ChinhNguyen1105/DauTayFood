@@ -1,4 +1,4 @@
-/* RegistPage.css */
+/* LoginPage.css */
 
 * {
     box-sizing: border-box;
@@ -6,7 +6,7 @@
     padding: 0;
 }
 
-.RegistPage-container {
+.LoginPage-container {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -16,7 +16,7 @@
 /* Main content area */
 
 /* Background image styling */
-.RegistPage-background {
+.LoginPage-background {
     position: absolute;
     top: 0;
     left: 0;
@@ -26,7 +26,7 @@
     overflow: hidden;
 }
 
-.RegistPage-background img {
+.LoginPage-background img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -34,8 +34,8 @@
     filter: brightness(0.7);
 }
 
-/* Registration form styling to match the image */
-.RegistForm {
+/* Login form styling to match the image */
+.LoginForm {
     background: rgba(255, 255, 255, 0.171);
     backdrop-filter: blur(10px);
     border-radius: 15px;
@@ -50,12 +50,12 @@
 }
 
 /* Form title styling */
-.regist-form-title {
+.login-form-title {
     text-align: center;
     margin-bottom: 2rem;
 }
 
-.regist-form-title h2 {
+.login-form-title h2 {
     color: #333;
     font-size: 1.8rem;
     font-weight: 600;
@@ -63,18 +63,18 @@
 }
 
 /* Input container styling */
-.regist-form-inputname,
-.regist-form-email,
-.regist-form-password,
-.regist-form-confirm-password {
+.login-form-inputname,
+.login-form-email,
+.login-form-password,
+.login-form-confirm-password {
     margin-bottom: 1.5rem;
 }
 
 /* Input field styling */
-.regist-form-inputname input,
-.regist-form-email input,
-.regist-form-password input,
-.regist-form-confirm-password input {
+.login-form-inputname input,
+.login-form-email input,
+.login-form-password input,
+.login-form-confirm-password input {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,19 +88,19 @@
     color: rgb(32, 32, 32);
 }
 
-.regist-form-inputname input:focus,
-.regist-form-email input:focus,
-.regist-form-password input:focus,
-.regist-form-confirm-password input:focus {
+.login-form-inputname input:focus,
+.login-form-email input:focus,
+.login-form-password input:focus,
+.login-form-confirm-password input:focus {
     outline: none;
     border-color: #ff6b6b;
     box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
 }
 
-.regist-form-inputname input::placeholder,
-.regist-form-email input::placeholder,
-.regist-form-password input::placeholder,
-.regist-form-confirm-password input::placeholder {
+.login-form-inputname input::placeholder,
+.login-form-email input::placeholder,
+.login-form-password input::placeholder,
+.login-form-confirm-password input::placeholder {
     color: #999;
     text-transform: capitalize;
 }
@@ -115,12 +115,12 @@
 }
 
 /* Submit button container */
-.regist-form-confirm {
+.login-form-confirm {
     margin-top: 1.5rem;
 }
 
 /* Submit button styling */
-.regist-form-confirm button {
+.login-form-confirm button {
     width: 100%;
     padding: 0.9rem;
     background: linear-gradient(135deg, #ff6b6b, #ff5252);
@@ -135,17 +135,15 @@
     letter-spacing: 0.5px;
 }
 
-.regist-form-confirm button:hover {
+.login-form-confirm button:hover {
     background: linear-gradient(135deg, #ff5252, #e53e3e);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
 }
 
-.regist-form-confirm button:active {
+.login-form-confirm button:active {
     transform: translateY(0);
 }
-
-
 
 /* Responsive design */
 @media (max-width: 768px) {
@@ -159,7 +157,7 @@
         margin: 0 auto;
     }
 
-    .regist-form-title h2 {
+    .login-form-title h2 {
         font-size: 1.6rem;
     }
 }
@@ -175,14 +173,14 @@
         border-radius: 10px;
     }
 
-    .regist-form-inputname input,
-    .regist-form-email input,
-    .regist-form-password input,
-    .regist-form-confirm-password input {
+    .login-form-inputname input,
+    .login-form-email input,
+    .login-form-password input,
+    .login-form-confirm-password input {
         padding: 0.7rem 0.8rem;
     }
 
-    .regist-form-confirm button {
+    .login-form-confirm button {
         padding: 0.8rem;
     }
 }
@@ -201,12 +199,12 @@
 }
 
 /* Additional styling for better visual hierarchy */
-.RegistPage-container {
+.LoginPage-container {
     background-color: #f5f5f5;
 }
 
 /* Ensure proper spacing and layout */
-.RegistPage-container>* {
+.LoginPage-container>* {
     flex-shrink: 0;
 }
 
@@ -215,43 +213,43 @@ main {
 }
 
 /* Input validation states */
-.regist-form-inputname input.error,
-.regist-form-email input.error,
-.regist-form-password input.error,
-.regist-form-confirm-password input.error {
+.login-form-inputname input.error,
+.login-form-email input.error,
+.login-form-password input.error,
+.login-form-confirm-password input.error {
     border-color: #e53e3e;
     box-shadow: 0 0 0 2px rgba(229, 62, 62, 0.2);
 }
 
 /* Success state for inputs */
-.regist-form-inputname input.success,
-.regist-form-email input.success,
-.regist-form-password input.success,
-.regist-form-confirm-password input.success {
+.login-form-inputname input.success,
+.login-form-email input.success,
+.login-form-password input.success,
+.login-form-confirm-password input.success {
     border-color: #38a169;
     box-shadow: 0 0 0 2px rgba(56, 161, 105, 0.2);
 }
 
-.regist-form-loginoption {
+.regist-form-registoption {
     margin-top: 18px;
     text-align: center;
 }
 
-.regist-form-loginoption a {
+.regist-form-registoption a {
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 4px;
 }
 
-.loginoption {
+.registnoption {
     color: #acacac;
     font-size: 1rem;
     margin: 0;
     display: inline;
 }
 
-.loginoption1 {
+.registoption1 {
     color: #ff8686;
     font-weight: 600;
     font-size: 1rem;
@@ -261,7 +259,7 @@ main {
     cursor: pointer;
 }
 
-.regist-form-loginoption a:hover .loginoption1 {
+.regist-form-registoption a:hover .registoption1 {
     color: #ff2c2c;
     text-decoration: underline;
 }

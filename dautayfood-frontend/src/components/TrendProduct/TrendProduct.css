@@ -1,0 +1,134 @@
+.TrendProduct-container {
+    background: linear-gradient(to bottom right, #ffe3f3, #f8d0c8);
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto;
+    max-width: 90%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.TrendProduct-quote-and-sticker {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.TrendProduct-sticker img {
+    width: 120px;
+    height: auto;
+    margin-right: 30px;
+}
+
+.TrendProduct-quote {
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 20px;
+    border-radius: 16px;
+    font-style: italic;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.TrendProduct-top-product {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.TrendProduct-top1,
+.TrendProduct-top2,
+.TrendProduct-top3 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.TrendProduct-cirle1,
+.TrendProduct-cirle2,
+.TrendProduct-cirle3 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -20px;
+    z-index: 1;
+}
+
+.TrendProduct-cirle1 {
+    background-color: #ff4d4f;
+    /* đỏ */
+}
+
+.TrendProduct-cirle2 {
+    background-color: #facc15;
+    /* vàng */
+}
+
+.TrendProduct-cirle3 {
+    background-color: #3b82f6;
+    /* xanh */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .TrendProduct-container {
+        padding: 1rem;
+    }
+
+    .TrendProduct-quote-and-sticker {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .TrendProduct-sticker {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+    }
+
+    .TrendProduct-quote p {
+        font-size: 1rem;
+    }
+
+    .TrendProduct-top-product {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .TrendProduct-top1,
+    .TrendProduct-top2,
+    .TrendProduct-top3 {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .TrendProduct-quote p {
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+
+    .TrendProduct-cirle1,
+    .TrendProduct-cirle2,
+    .TrendProduct-cirle3 {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.25rem;
+    }
+}

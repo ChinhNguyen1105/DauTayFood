@@ -1,12 +1,11 @@
 import { useState } from "react";
-import './RegistForm.css';
-import { Link } from "react-router-dom";
+import './LoginForm.css';
+import { Link } from 'react-router-dom';
 
-const RegistForm = () => {
+const LoginForm = () => {
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [passWord, setPassWord] = useState('');
-    const [confirmPassword, setConfirmPassWord] = useState('');
     const [error, setError] = useState({});
 
     const validate = () => {
@@ -19,7 +18,6 @@ const RegistForm = () => {
             newErrors.email = "Email không hợp lệ.";
         }
         if (passWord.length < 6) newErrors.passWord = "Mật khẩu phải có ít nhất 6 ký tự.";
-        if (passWord !== confirmPassword) newErrors.confirmPassword = "Mật khẩu không khớp.";
 
         setError(newErrors);
 
@@ -30,7 +28,7 @@ const RegistForm = () => {
         e.preventDefault();
 
         if (validate()) {//neu hop le
-            alert("Đăng ký thành công!");
+            alert("Đăng nhập thành công!");
             console.log({
                 fullName,
                 email,
@@ -40,17 +38,16 @@ const RegistForm = () => {
             setFullName("");
             setEmail("");
             setPassWord("");
-            setConfirmPassWord("");
             setError({});
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="RegistForm">
-            <div className="regist-form-title">
-                <h2>Đăng Ký</h2>
+        <form onSubmit={handleSubmit} className="LoginForm">
+            <div className="login-form-title">
+                <h2>Đăng Nhập</h2>
             </div>
-            <div className="regist-form-inputname">
+            <div className="login-form-inputname">
                 <input
                     type="text"
                     placeholder="tên đăng nhập"
@@ -59,7 +56,7 @@ const RegistForm = () => {
                 />
                 {error.fullName && <div className="error">{error.fullName}</div>}
             </div>
-            <div className="regist-form-email">
+            <div className="login-form-email">
                 <input
                     type="text"
                     placeholder="email"
@@ -68,7 +65,7 @@ const RegistForm = () => {
                 />
                 {error.email && <div className="error">{error.email}</div>}
             </div>
-            <div className="regist-form-password">
+            <div className="login-form-password">
                 <input
                     type="password"
                     placeholder="mật khẩu"
@@ -77,22 +74,13 @@ const RegistForm = () => {
                 />
                 {error.passWord && <div className="error">{error.passWord}</div>}
             </div>
-            <div className="regist-form-confirm-password">
-                <input
-                    type="password"
-                    placeholder="xác nhận mật khẩu"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassWord(e.target.value)}
-                />
-                {error.confirmPassword && <div className="error">{error.confirmPassword}</div>}
+            <div className="login-form-confirm">
+                <button type="submit">đăng nhập</button>
             </div>
-            <div className="regist-form-confirm">
-                <button type="submit">xác nhận tạo tài khoản</button>
-            </div>
-            <div className="regist-form-loginoption">
-                <p className="loginoption">đã có tài khoản </p><Link to='/login' ><p className="loginoption1">Đăng nhập</p></Link>
+            <div className="regist-form-registoption">
+                <p className="registnoption">chưa có tài khoản </p><Link to='/regist' ><p className="registoption1">Đăng ký</p></Link>
             </div>
         </form>
     );
-}
-export default RegistForm;
+};
+export default LoginForm;

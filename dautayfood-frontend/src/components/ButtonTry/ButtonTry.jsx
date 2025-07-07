@@ -1,7 +1,7 @@
 import './ButtonTry.css'
 import React from 'react'
 
-const button = ({ onClick }) => {
+const Button = ({ onClick }) => {
 
   return (
 
@@ -11,4 +11,4 @@ const button = ({ onClick }) => {
 
   );
 }
-export default button;
+export default Button;

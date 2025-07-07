@@ -1,14 +1,10 @@
 import { useState } from 'react'
 import './Home.css'
-import Header from './components/Header/Header.jsx'
-import Footer from './components/Footer/Footer.jsx'
-import ProductCard from './components/ProductCard/ProductCard.jsx'
-import tcdd from './assets/tran-chau-duong-den.jpg'
-import tsmc from './assets/tra-matcha.jpg'
-import tmc from './assets/tra-mang-cau.jpg'
-import BigProductCard from './components/BigProductCard/BigProductCard.jsx'
-import HeroSection from './components/HeroBanner/HeroBanner.jsx'
-import ProductDetail from './components/ProductDetail/ProductDetail.jsx'
+import ProductCard from '../../components/ProductCard/ProductCard.jsx'
+import tcdd from '../../assets/tran-chau-duong-den.jpg'
+import BigProductCard from '../../components/BigProductCard/BigProductCard.jsx'
+import HeroSection from '../../components/HeroBanner/HeroBanner.jsx'
+import ProductDetail from '../../components/ProductDetail/ProductDetail.jsx'
 
 function Home() {
   const [count, setCount] = useState(0)
@@ -23,7 +19,6 @@ function Home() {
   };
   return (
     <div className="app-container">
-      <Header />
       <main>
         <HeroSection
           backgroundImages={[
@@ -109,7 +104,6 @@ function Home() {
         )}
         {/* Thêm nội dung chính ở đây */}
       </main>
-      <Footer />
     </div>
   )
 }
