@@ -1,13 +1,18 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 import "./SearchBox.css";
+import { useNavigate } from "react-router-dom"; // Add this
 
-const SearchBox = ({ placeholder = "Vietnamese stir fried morning glory....", onSearch }) => {
+const SearchBox = ({ onSearch }) => {
   const [value, setValue] = React.useState("");
+  const navigate = useNavigate(); // Add this
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (onSearch) onSearch(value);
+    if (onSearch) {
+      onSearch(value.trim());
+      navigate('/menu'); // Navigate programmatically
+    }
   };
 
   return (
@@ -15,7 +20,7 @@ const SearchBox = ({ placeholder = "Vietnamese stir fried morning glory....", on
       <input
         type="text"
         className="search-input"
-        placeholder={placeholder}
+        placeholder="Tìm kiếm món ăn..."
         value={value}
         onChange={e => setValue(e.target.value)}
       />

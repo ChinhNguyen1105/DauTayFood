@@ -6,7 +6,7 @@ import logo from '../../assets/logo.png';
 import AvatarMenu from '../../components/AvatarMenu/AvatarMenu';
 import SearchBox from "../SearchBox/SearchBox";
 
-const Header = () => {
+const Header = ({ onSearch }) => {
     return (
         <header className="header_container">
             <div id='header'>
@@ -19,7 +19,7 @@ const Header = () => {
                     <li><Link to='/Menu'>Menu</Link></li>
                 </ul>
                 <div className="search_box">
-                    <SearchBox />
+                    <SearchBox onSearch={onSearch} />
                 </div>
                 {/* Đăng nhập */}
                 <div className="regist">

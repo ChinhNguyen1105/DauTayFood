@@ -4,7 +4,7 @@ import ButtonTry from '../ButtonTry/ButtonTry';
 import ProductDetail from '../ProductDetail/ProductDetail';
 import ReactDOM from 'react-dom';
 
-function ProductCard({ name, image, price }) {
+function ProductCard({ name, image, price, type }) {
     const [showOverlay, setShowOverlay] = useState(false);
 
     const handleOpen = () => setShowOverlay(true);
@@ -16,11 +16,12 @@ function ProductCard({ name, image, price }) {
                 <img src={image} alt={name} className="product-img" />
                 <h3 className="product-price">{price}</h3>
                 <h3 className="product-name">{name}</h3>
+                <div className="product-type">Mã loại: {type}</div> { }
                 <div className="ButtonTry">
                     <ButtonTry onClick={handleOpen} />
                 </div>
             </div>
-
+            {/* khi trình duyệt chứa DOM */}
             {typeof document !== 'undefined' && showOverlay &&
                 ReactDOM.createPortal(
                     <div className="overlay">

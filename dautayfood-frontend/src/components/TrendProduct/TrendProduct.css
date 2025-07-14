@@ -39,7 +39,7 @@
 .TrendProduct-top-product {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 85px;
     flex-wrap: wrap;
 }
 

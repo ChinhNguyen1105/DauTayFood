@@ -10,7 +10,7 @@ export default function AppRoutes() {
             <Route path="/" element={<Home />} />
             <Route path="/regist" element={<RegistPage />} />
             <Route path='/login' element={<LoginPage />} />
-            <Route path='/menu' element={<MenuPage />} />
+            <Route path='/menu' element={<MenuPage searchTerm={searchTerm} />} />
         </Routes>
     );
 }
