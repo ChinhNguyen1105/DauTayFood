@@ -1,0 +1,309 @@
+/* AboutPage.css */
+
+:root {
+    --primary-color: #D4ECE0;
+    --accent-color: #FF8080;
+    --text-color: #333;
+    --light-bg: #fff;
+    --transition-speed: 0.6s;
+}
+
+/* Global classes */
+.AboutPage {
+    background: linear-gradient(to bottom right, var(--primary-color), var(--accent-color));
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fade animation */
+.AboutFadeIn {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.AboutFadeOut {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+/* Hero section */
+.AboutHeroSection {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+
+.AboutHeroOverlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.AboutHeroOverlay-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.AboutHeroContent {
+    position: relative;
+    z-index: 1;
+    color: white;
+    max-width: 800px;
+}
+
+.AboutHeroTitle {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.AboutHeroSubtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.AboutHeroButtons button {
+    margin: 0.5rem;
+    padding: 0.75rem 2rem;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.AboutBtnPrimary {
+    background: white;
+    color: var(--accent-color);
+    border: none;
+}
+
+.AboutBtnPrimary:hover {
+    background: #ffeaea;
+    transform: translateY(-2px);
+}
+
+.AboutBtnOutline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.AboutBtnOutline:hover {
+    background: white;
+    color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+/* Section headers */
+.AboutContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.AboutSectionHeader h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.AboutSectionDivider {
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    margin: 0 auto 2rem auto;
+    border-radius: 2px;
+}
+
+/* Story section */
+.AboutStoryGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.AboutStoryCard {
+    background: var(--light-bg);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease;
+}
+
+.AboutStoryCard:hover {
+    transform: translateY(-6px);
+}
+
+.AboutGreen {
+    background: var(--primary-color);
+}
+
+.AboutPink {
+    background: var(--accent-color);
+    color: white;
+}
+
+/* Highlight cards */
+.AboutHighlightCard {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.AboutHighlightCard:hover {
+    transform: scale(1.03);
+}
+
+.AboutHighlightIcon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--accent-color);
+    color: white;
+    font-size: 1.5rem;
+}
+
+/* Products */
+.AboutProductsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+}
+
+.AboutProductCard {
+    background: white;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.AboutProductCard:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.AboutProductIcon {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    background: var(--primary-color);
+    color: var(--accent-color);
+}
+
+.AboutGreenBg {
+    background: var(--primary-color);
+}
+
+.AboutPinkBg {
+    background: var(--accent-color);
+    color: white;
+}
+
+.AboutStarIcon {
+    color: gold;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+/* Values */
+.AboutValuesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    text-align: center;
+}
+
+.AboutValueCard {
+    padding: 2rem;
+    background: var(--light-bg);
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.AboutValueCard:hover {
+    transform: translateY(-5px);
+}
+
+.AboutValueIcon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: var(--accent-color);
+}
+
+/* Utilities */
+.AboutIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.AboutIconBounce {
+    animation: bounce 2s infinite;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+}
+
+.AboutStoryHighlightBox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.AboutStoryLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}

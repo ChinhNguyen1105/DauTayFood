@@ -1,16 +1,49 @@
 /* AvatarMenu.css */
 .avatar-menu {
     position: relative;
-    display: inline-block;
-}
-
-.avatar-img {
+    /* display: inline-block;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
     border: 2px solid #fff;
     box-shadow: 0 2px 8px #0001;
+    transition: box-shadow 0.2s;
+    justify-content: center;
+    align-items: center; */
+    width: 40px;
+    height: 40px;
+    background-color: #6366f1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #fff;
+}
+
+.avatar-img {
+    /* width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px #0001; */
+    width: 40px;
+    height: 40px;
+    background-color: #6366f1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #fff;
     transition: box-shadow 0.2s;
 }
 

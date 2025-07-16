@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./SearchBox.css";
 import { useNavigate } from "react-router-dom"; // Add this
@@ -11,9 +11,16 @@ const SearchBox = ({ onSearch }) => {
     e.preventDefault();
     if (onSearch) {
       onSearch(value.trim());
-      navigate('/menu'); // Navigate programmatically
+      navigate('/menu#search-linking'); // Navigate programmatically
     }
   };
+
+  // Reset giá trị input khi searchTerm từ bên ngoài thay đổi
+  useEffect(() => {
+    if (!value) {
+      setValue("");
+    }
+  }, [value]);
 
   return (
     <form className="search-box" onSubmit={handleSubmit}>

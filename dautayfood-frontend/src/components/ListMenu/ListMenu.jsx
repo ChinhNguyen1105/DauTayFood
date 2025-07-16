@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import FilterTabs from "../FilterTabs/FilterTabs";
 import ProductCard from "../ProductCard/ProductCard";
-import Products from "../../Product";
 import "./ListMenu.css";
 
-const ListMenu = ({ selectedType = "tat-ca", searchTerm = "" }) => {
+const ListMenu = ({ Products, selectedType = "tat-ca", searchTerm = "" }) => {
+    console.log('Products in ListMenu:', Products);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12;
-
     // Improved normalize text function
     const normalizeText = (str) => {
         if (!str) return "";
@@ -75,10 +74,7 @@ const ListMenu = ({ selectedType = "tat-ca", searchTerm = "" }) => {
                     currentProducts.map((product) => (
                         <ProductCard
                             key={product.id}
-                            name={product.name}
-                            image={product.image}
-                            price={product.price}
-                            type={product.type}
+                            product={product}  // Truyền trực tiếp object product thay vì tạo object mới
                         />
                     ))
                 )}

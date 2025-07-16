@@ -1,0 +1,260 @@
+/* CheckoutPage.css */
+.checkout-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+.header {
+    background-color: #ffb3ba;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    font-size: 24px;
+}
+
+.logo-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.cart-text {
+    margin-left: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+.nav-tabs {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    background-color: #c8e6c9;
+    padding: 15px 30px;
+    gap: 20px;
+}
+
+.nav-item {
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+}
+
+.nav-item.active {
+    color: #2e7d32;
+}
+
+.items-container {
+    background-color: white;
+    margin: 0 20px;
+    border: 3px solid #4fc3f7;
+    border-radius: 8px;
+}
+
+.item-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 2px solid #ffb3ba;
+    gap: 20px;
+}
+
+.item-row:last-child {
+    border-bottom: none;
+}
+
+.item-row:nth-child(even) {
+    background-color: #f0f8f0;
+}
+
+.item-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.delete-btn:hover {
+    color: #e57373;
+}
+
+.item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+}
+
+.item-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.item-details p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.item-price {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    background-color: #ffb3ba;
+    color: #333;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qty-btn:hover {
+    background-color: #ff9999;
+}
+
+.qty-btn.minus {
+    background-color: #ffb3ba;
+}
+
+.qty-btn.plus {
+    background-color: #ffb3ba;
+}
+
+.quantity {
+    min-width: 30px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.item-total {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.checkout-footer {
+    background-color: #ffb3ba;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+}
+
+.select-all {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+}
+
+.select-all input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.total-amount {
+    font-size: 18px;
+    color: #333;
+}
+
+.total-price {
+    font-weight: bold;
+    color: #2e7d32;
+    font-size: 20px;
+}
+
+.checkout-btn {
+    background-color: #e57373;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.checkout-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+    .nav-tabs,
+    .item-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .item-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .checkout-footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .footer-right {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

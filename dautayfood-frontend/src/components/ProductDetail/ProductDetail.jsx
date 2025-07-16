@@ -5,10 +5,8 @@ import ButtonTry from "../ButtonTry/ButtonTry";
 import ButtonClose from "../ButtonClose/ButtonClose";
 
 const ProductDetail = ({
-    image = "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
-    name = "Bông lan trứng muối",
-    desc = "Bông lan mềm mịn kết hợp vị béo ngậy của sốt phô mai, chà bông mặn và trứng muối bùi bùi – món ăn vặt “quốc dân” khiến ai ăn thử cũng mê!",
-    onClose, // Nhận hàm đóng từ component cha
+    product,
+    onClose // Nhận hàm đóng từ component cha
 }) => {
     const [quantity, setQuantity] = useState(1);
     const [note, setNote] = useState("");
@@ -19,11 +17,11 @@ const ProductDetail = ({
                 <ButtonClose onClick={onClose} />
             </div>
             <div className="product-detail-main1">
-                <img src={image} alt={name} className="product-detail-img" />
+                <img src={product.image} alt={name} className="product-detail-img" />
                 <div className="product-detail-info">
                     <h2>Thông tin chi tiết</h2>
-                    <div className="product-detail-name"><b>Tên sản phẩm:</b> {name}</div>
-                    <div className="product-detail-desc"><b>Mô tả:</b> {desc}</div>
+                    <div className="product-detail-name"><b>Tên sản phẩm:</b> {product.name}</div>
+                    <div className="product-detail-desc"><b>Mô tả:</b> {product.description}</div>
 
                 </div>
             </div>

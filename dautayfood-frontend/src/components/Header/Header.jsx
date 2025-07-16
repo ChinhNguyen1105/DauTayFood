@@ -6,7 +6,7 @@ import logo from '../../assets/logo.png';
 import AvatarMenu from '../../components/AvatarMenu/AvatarMenu';
 import SearchBox from "../SearchBox/SearchBox";
 
-const Header = ({ onSearch }) => {
+const Header = ({ onSearch, avatarImage, getInitialAvatar }) => {
     return (
         <header className="header_container">
             <div id='header'>
@@ -14,17 +14,17 @@ const Header = ({ onSearch }) => {
                     <img src={logo} alt="Logo" className='logo' />
                 </Link>
                 <ul className='nav'>
-                    <li> <a href="#">Về chúng tôi</a></li>
-                    <li><a href="#">Giỏ hàng</a></li>
+                    <li><Link to='/about-us'>Về chúng tôi</Link></li>
+                    <li><Link to='/pay'>Giỏ hàng</Link></li>
                     <li><Link to='/Menu'>Menu</Link></li>
                 </ul>
                 <div className="search_box">
-                    <SearchBox onSearch={onSearch} />
+                    <SearchBox onSearch={onSearch} setResetType={"tat-ca"} />
                 </div>
                 {/* Đăng nhập */}
                 <div className="regist">
                     <span > <Link to='/regist'>Đăng ký - Đăng nhập</Link>  </span>
-                    <div id='avatar'><AvatarMenu /> </div>
+                    <div id='avatar'><AvatarMenu avatarImage={avatarImage} getInitialAvatar={getInitialAvatar} /> </div>
                 </div>
             </div>
         </header >

@@ -3,9 +3,14 @@ import './ProductCard.css';
 import ButtonTry from '../ButtonTry/ButtonTry';
 import ProductDetail from '../ProductDetail/ProductDetail';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
-function ProductCard({ name, image, price, type }) {
+function ProductCard({ product }) {
     const [showOverlay, setShowOverlay] = useState(false);
+
+    if (!product) {
+        return <div className="product-card error">No product data received</div>;
+    }
 
     const handleOpen = () => setShowOverlay(true);
     const handleClose = () => setShowOverlay(false);
@@ -13,33 +18,48 @@ function ProductCard({ name, image, price, type }) {
     return (
         <>
             <div className="product-card">
-                <img src={image} alt={name} className="product-img" />
-                <h3 className="product-price">{price}</h3>
-                <h3 className="product-name">{name}</h3>
-                <div className="product-type">Mã loại: {type}</div> { }
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className="product-img"
+                    onError={(e) => {
+                        console.error('Image failed to load:', product.image);
+                        e.target.src = 'fallback-image-path.jpg';
+                    }}
+                />
+                <h3 className="product-price">{product.price}</h3>
+                <h3 className="product-name">{product.name}</h3>
+                <div className="product-type">Mã loại: {product.type}</div>
                 <div className="ButtonTry">
                     <ButtonTry onClick={handleOpen} />
                 </div>
             </div>
-            {/* khi trình duyệt chứa DOM */}
-            {typeof document !== 'undefined' && showOverlay &&
-                ReactDOM.createPortal(
-                    <div className="overlay">
-                        <div className="detail-box">
-                            <ProductDetail
-                                image="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
-                                name="Bông lan trứng muối"
-                                desc="Bông lan mềm mịn kết hợp vị béo ngậy của sốt phô mai, chà bông mặn và trứng muối bùi bùi – món ăn vặt quốc dân khiến ai ăn thử cũng mê!"
-                                onClose={handleClose}
-                            />
-                        </div>
-                    </div>,
-                    document.body
-                )
-            }
+            {showOverlay && (
+                <div className="overlay">
+                    <div className="detail-box">
+                        <ProductDetail
+                            product={product}
+                            onClose={handleClose}
+                        />
+                    </div>
+                </div>
+            )}
         </>
     );
 }
+
+// Update PropTypes to be more specific
+ProductCard.propTypes = {
+    product: PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        name: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        price: PropTypes.string.isRequired,
+        type: PropTypes.oneOf(['tra-sua', 'che', 'banh-trang', 'bong-lan']).isRequired,
+        description: PropTypes.string
+    }).isRequired
+};
+
 
 export default ProductCard;
 

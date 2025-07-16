@@ -71,6 +71,42 @@ function Home() {
                 price={'30.000đ'}
               />
             </div>
+
+          </div>
+          <div className="featured-product">
+            <div className="featured-image">
+              <BigProductCard
+                image="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
+                name="Bông lan trứng muối"
+                desc="Bông lan mềm mịn kết hợp vị béo ngậy của sốt phô mai, chà bông mặn và trứng muối bùi bùi – món ăn vặt “quốc dân” khiến ai ăn thử cũng mê! loremmmmmmmmmmmmmmmmmmmmmmmmm"
+                price="55k"
+                rating='4.5'
+                sold="1.7k"
+              />
+              <ProductCard
+                name="trà sữa trân châu đường đen"
+                image={tcdd}
+                price={'30.000đ'}
+              />
+            </div>
+
+          </div><div className="featured-product">
+            <div className="featured-image">
+              <BigProductCard
+                image="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
+                name="Bông lan trứng muối"
+                desc="Bông lan mềm mịn kết hợp vị béo ngậy của sốt phô mai, chà bông mặn và trứng muối bùi bùi – món ăn vặt “quốc dân” khiến ai ăn thử cũng mê! loremmmmmmmmmmmmmmmmmmmmmmmmm"
+                price="55k"
+                rating='4.5'
+                sold="1.7k"
+              />
+              <ProductCard
+                name="trà sữa trân châu đường đen"
+                image={tcdd}
+                price={'30.000đ'}
+              />
+            </div>
+
           </div>
         </section>
         {/* Thêm nội dung chính ở đây */}

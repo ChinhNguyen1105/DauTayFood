@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './HeroBanner.css';
-
+import { Link } from 'react-router-dom';
 const HeroSection = ({
     backgroundImages = [
         "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1920&q=80",
@@ -108,12 +108,12 @@ const HeroSection = ({
                         </div>
 
                         {/* Promotional Button */}
-                        <button
+                        <Link to='/menu#search-linking'> <button
                             className="promo-button"
                             onClick={handlePromoClick}
                         >
                             {promoText}
-                        </button>
+                        </button></Link>
                     </div>
                 </div>
 
