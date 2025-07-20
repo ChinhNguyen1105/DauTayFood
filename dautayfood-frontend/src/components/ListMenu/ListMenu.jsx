@@ -3,8 +3,16 @@ import FilterTabs from "../FilterTabs/FilterTabs";
 import ProductCard from "../ProductCard/ProductCard";
 import "./ListMenu.css";
 
-const ListMenu = ({ Products, selectedType = "tat-ca", searchTerm = "" }) => {
-    console.log('Products in ListMenu:', Products);
+const ListMenu = ({
+    Products,
+    selectedType = "tat-ca",
+    searchTerm = "",
+    selectedProduct,
+    handleAddToCart,
+    handleOpen,
+    handleClose
+}) => {
+    console.log('value of product in menu: ', Products);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12;
     // Improved normalize text function
@@ -74,7 +82,11 @@ const ListMenu = ({ Products, selectedType = "tat-ca", searchTerm = "" }) => {
                     currentProducts.map((product) => (
                         <ProductCard
                             key={product.id}
-                            product={product}  // Truyền trực tiếp object product thay vì tạo object mới
+                            product={product}
+                            selectedProduct={selectedProduct}
+                            handleAddToCart={handleAddToCart}// Truyền trực tiếp object product thay vì tạo object mới
+                            handleOpen={handleOpen}
+                            handleClose={handleClose}
                         />
                     ))
                 )}

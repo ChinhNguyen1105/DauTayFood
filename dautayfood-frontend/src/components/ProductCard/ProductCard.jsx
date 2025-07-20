@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ProductCard.css';
 import ButtonTry from '../ButtonTry/ButtonTry';
 import ProductDetail from '../ProductDetail/ProductDetail';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-function ProductCard({ product }) {
-    const [showOverlay, setShowOverlay] = useState(false);
-
-    if (!product) {
-        return <div className="product-card error">No product data received</div>;
-    }
-
-    const handleOpen = () => setShowOverlay(true);
-    const handleClose = () => setShowOverlay(false);
-
+function ProductCard({
+    product,
+    selectedProduct,
+    handleAddToCart,
+    handleOpen,
+    handleClose
+}) {
+    if (!product) return null; // tránh lỗi undefined
+    const isOverlayVisible = selectedProduct?.id === product.id;
     return (
         <>
             <div className="product-card">
@@ -27,19 +25,21 @@ function ProductCard({ product }) {
                         e.target.src = 'fallback-image-path.jpg';
                     }}
                 />
-                <h3 className="product-price">{product.price}</h3>
+                <h3 className="product-price">{product.price.toLocaleString()}đ</h3>
                 <h3 className="product-name">{product.name}</h3>
                 <div className="product-type">Mã loại: {product.type}</div>
                 <div className="ButtonTry">
-                    <ButtonTry onClick={handleOpen} />
+                    <ButtonTry onClick={() => handleOpen(product)}>thử ngay</ButtonTry>
                 </div>
             </div>
-            {showOverlay && (
+
+            {isOverlayVisible && (
                 <div className="overlay">
                     <div className="detail-box">
                         <ProductDetail
                             product={product}
                             onClose={handleClose}
+                            handleAddToCart={handleAddToCart}
                         />
                     </div>
                 </div>
@@ -48,19 +48,19 @@ function ProductCard({ product }) {
     );
 }
 
-// Update PropTypes to be more specific
 ProductCard.propTypes = {
     product: PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         name: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
-        price: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
         type: PropTypes.oneOf(['tra-sua', 'che', 'banh-trang', 'bong-lan']).isRequired,
         description: PropTypes.string
-    }).isRequired
+    }),
+    selectedProduct: PropTypes.object,
+    handleAddToCart: PropTypes.func.isRequired,
+    handleOpen: PropTypes.func.isRequired,
+    handleClose: PropTypes.func.isRequired
 };
 
-
 export default ProductCard;
-
-

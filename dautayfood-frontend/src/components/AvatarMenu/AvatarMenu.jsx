@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import './AvatarMenu.css';
 import { Link } from 'react-router-dom';
-
+import { FaUserPlus, FaSignInAlt, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import { MdAccountCircle } from 'react-icons/md';
 // Sửa cách khai báo props bằng cách dùng object destructuring
 function AvatarMenu({ avatarImage, getInitialAvatar }) {
     const [open, setOpen] = useState(false);
@@ -40,9 +41,10 @@ function AvatarMenu({ avatarImage, getInitialAvatar }) {
             {open && (
                 <div className="dropdown-menu">
                     <ul>
-                        <Link to='/profile'><li>Tài khoản</li></Link>
-                        <li>Cài đặt</li>
-                        <li>Đăng xuất</li>
+                        <Link to='/profile'><li><MdAccountCircle /> Tài khoản</li></Link>
+                        <Link> <li><FaCog /> Cài đặt</li></Link>
+                        <Link><li><FaSignOutAlt /> Đăng xuất</li> </Link>
+                        <Link to='/login'><li>< FaSignInAlt /> Đăng nhập </li></Link>
                     </ul>
                 </div>
             )}

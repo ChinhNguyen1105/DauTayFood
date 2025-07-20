@@ -1,12 +1,15 @@
-import './Home.css'
-import ProductCard from '../../components/ProductCard/ProductCard.jsx'
-import tcdd from '../../assets/tran-chau-duong-den.jpg'
-import BigProductCard from '../../components/BigProductCard/BigProductCard.jsx'
-import HeroSection from '../../components/HeroBanner/HeroBanner.jsx'
+import './Home.css';
+import ProductCard from '../../components/ProductCard/ProductCard.jsx';
+import BigProductCard from '../../components/BigProductCard/BigProductCard.jsx';
+import HeroSection from '../../components/HeroBanner/HeroBanner.jsx';
+import TypicalProducts from '../../Products/TypicalProduct.jsx';
+import ProductForBigCard from '../../Products/ProductForBigCard.jsx';
 
-function Home() {
+function Home({ selectedProduct, handleOpen, handleClose, handleAddToCart }) {
+  console.log("value of typical product: ", TypicalProducts);
+  const showOverlay = !!selectedProduct;
   return (
-    <div className="app-container">
+    <div className="Home-app-container">
       <main>
         <HeroSection
           backgroundImages={[
@@ -20,99 +23,48 @@ function Home() {
           autoSlideInterval={3000}
         />
 
-        {/* <!-- Products Section --> */}
-        <section className="products-section">
-          <div className='section1-title'>
-            <h2 className="section-title">món ngon đề xuất cho bạn</h2>
+        {/* Products Section */}
+        <section className="Home-products-section">
+          <div className='Home-section1-title'>
+            <h2 className="Home-section-title">món ngon đề xuất cho bạn</h2>
           </div>
-          <div className="products-grid">
-            <ProductCard
-              name="trà sữa trân châu đường đen"
-              image={tcdd}
-              price={'30.000đ'}
-            />
-            <ProductCard
-              name="trà sữa trân châu đường đen"
-              image={tcdd}
-              price={'30.000đ'}
-            />
-            <ProductCard
-              name="trà sữa trân châu đường đen"
-              image={tcdd}
-              price={'30.000đ'}
-            />
-            <ProductCard
-              name="trà sữa trân châu đường đen"
-              image={tcdd}
-              price={'30.000đ'}
-            />
+          <div className="Home-products-grid">
+            {TypicalProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                selectedProduct={selectedProduct}
+                handleAddToCart={handleAddToCart}
+                handleOpen={handleOpen}
+                handleClose={handleClose}
+              />
+            ))}
           </div>
         </section>
 
-        {/* <!-- Featured Product Section --> */}
-
-        <section className="featured-section">
-          <div className='section2-title'>
-            <h2 className="section-title">tham khảo thêm...</h2>
+        {/* Featured Product Section */}
+        <section className="Home-featured-section">
+          <div className='Home-section2-title'>
+            <h2 className="Home-section-title">tham khảo thêm...</h2>
           </div>
-          <div className="featured-product">
-            <div className="featured-image">
-              <BigProductCard
-                image="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
-                name="Bông lan trứng muối"
-                desc="Bông lan mềm mịn kết hợp vị béo ngậy của sốt phô mai, chà bông mặn và trứng muối bùi bùi – món ăn vặt “quốc dân” khiến ai ăn thử cũng mê! loremmmmmmmmmmmmmmmmmmmmmmmmm"
-                price="55k"
-                rating='4.5'
-                sold="1.7k"
-              />
-              <ProductCard
-                name="trà sữa trân châu đường đen"
-                image={tcdd}
-                price={'30.000đ'}
-              />
+          <div className="Home-featured-product">
+            <div className="Home-featured-image">
+              {ProductForBigCard.map((product) => (
+                <BigProductCard
+                  key={product.id}
+                  product={product}
+                  selectedProduct={selectedProduct}
+                  handleAddToCart={handleAddToCart}
+                  handleOpen={() => handleOpen(product)}
+                  handleClose={handleClose}
+                />
+              ))}
             </div>
-
-          </div>
-          <div className="featured-product">
-            <div className="featured-image">
-              <BigProductCard
-                image="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
-                name="Bông lan trứng muối"
-                desc="Bông lan mềm mịn kết hợp vị béo ngậy của sốt phô mai, chà bông mặn và trứng muối bùi bùi – món ăn vặt “quốc dân” khiến ai ăn thử cũng mê! loremmmmmmmmmmmmmmmmmmmmmmmmm"
-                price="55k"
-                rating='4.5'
-                sold="1.7k"
-              />
-              <ProductCard
-                name="trà sữa trân châu đường đen"
-                image={tcdd}
-                price={'30.000đ'}
-              />
-            </div>
-
-          </div><div className="featured-product">
-            <div className="featured-image">
-              <BigProductCard
-                image="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
-                name="Bông lan trứng muối"
-                desc="Bông lan mềm mịn kết hợp vị béo ngậy của sốt phô mai, chà bông mặn và trứng muối bùi bùi – món ăn vặt “quốc dân” khiến ai ăn thử cũng mê! loremmmmmmmmmmmmmmmmmmmmmmmmm"
-                price="55k"
-                rating='4.5'
-                sold="1.7k"
-              />
-              <ProductCard
-                name="trà sữa trân châu đường đen"
-                image={tcdd}
-                price={'30.000đ'}
-              />
-            </div>
-
           </div>
         </section>
-        {/* Thêm nội dung chính ở đây */}
       </main>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

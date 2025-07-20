@@ -8,12 +8,37 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import MenuPage from './pages/MenuPage/MenuPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import AboutUsPage from './pages/AboutPage/AboutPage';
-import PayPage from './pages/PayPage/PayPage';
-import Products from './Product';
+import CardPage from './pages/CartPage/CardPage';
+import Products from './Products/Product';
+import ScrollToTop from './ScrollToTop';
+import CheckOut from './pages/CheckOut/CheckOut';
+
 
 function App() {
-    // Add debugging log at the top of component
-    console.log('this is from App', Products);
+
+    // quản lý sản phẩm đang hiển thị chi tiết
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const handleOpen = (product) => setSelectedProduct(product);
+    const handleClose = () => setSelectedProduct(null);
+
+    // quản lý giỏ hàng
+    const [cartItems, setCartItems] = useState([]);
+    const handleAddToCart = (product, quantity = 1, note = "") => {
+        setCartItems((prev) => {
+            const exists = prev.find((item) => item.id === product.id);
+            if (exists) {
+                return prev.map((item) =>
+                    item.id === product.id
+                        ? { ...item, quantity: item.quantity + quantity, note }
+                        : item
+                );
+            } else {
+                return [...prev, { ...product, quantity, note }];
+            }
+        });
+    };
+
+    // thông tin người dùng
     const initialData = {
         userID: '123456789',
         loginName: 'ChinhNguyen1152k5',
@@ -24,53 +49,84 @@ function App() {
         month: '05',
         year: '2005'
     };
+
     const [searchTerm, setSearchTerm] = useState("");
     const [avatarImage, setAvatarImage] = useState(null);
     const [profileData, setProfileData] = useState(initialData);
-    const [product, setProduct] = useState(null);
 
-    // Generate default avatar from initials
     const getInitialAvatar = () => {
         return profileData.loginName.charAt(0).toUpperCase();
     };
-    const handleSearch = (term) => {
-        setSearchTerm(term);
-    };
-    const handleAvatarChange = (change) => {
-        setAvatarImage(change);
-    }
-    const handleProfileData = (change) => {
-        setProfileData(change);
-    }
+
+    const handleSearch = (term) => setSearchTerm(term);
+    const handleAvatarChange = (change) => setAvatarImage(change);
+    const handleProfileData = (change) => setProfileData(change);
+
     return (
         <>
-            <Header onSearch={handleSearch} avatarImage={avatarImage} getInitialAvatar={getInitialAvatar} />
+            <ScrollToTop />
+            <Header
+                onSearch={handleSearch}
+                avatarImage={avatarImage}
+                getInitialAvatar={getInitialAvatar}
+            />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/regist" element={<RegistPage />} />
-                <Route path='/login' element={<LoginPage />} />
                 <Route
-                    path='/menu'
+                    path="/"
                     element={
-                        <MenuPage
-                            Products={Products} // Add Products prop here
-                            searchTerm={searchTerm}
-                            onSearch={handleSearch}
+                        <Home
+                            selectedProduct={selectedProduct}
+                            handleOpen={handleOpen}
+                            handleClose={handleClose}
+                            handleAddToCart={handleAddToCart}
                         />
                     }
                 />
-                <Route path='/profile' element={
-                    <ProfilePage
-                        avatarImage={avatarImage}
-                        setAvatarImage={handleAvatarChange}
-                        getInitialAvatar={getInitialAvatar}
-                        profileData={profileData}
-                        setProfileData={handleProfileData}
-                        initialData={initialData}
-                    />}
+                <Route path="/regist" element={<RegistPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route
+                    path="/menu"
+                    element={
+                        <MenuPage
+                            Products={Products}
+                            searchTerm={searchTerm}
+                            onSearch={handleSearch}
+                            handleAddToCart={handleAddToCart}
+                            selectedProduct={selectedProduct}
+                            handleOpen={handleOpen}
+                            handleClose={handleClose}
+                        />
+                    }
                 />
-                <Route path='/about-us' element={<AboutUsPage />}></Route>
-                <Route path='/pay' element={<PayPage />}></Route>
+                <Route
+                    path="/profile"
+                    element={
+                        <ProfilePage
+                            avatarImage={avatarImage}
+                            setAvatarImage={handleAvatarChange}
+                            getInitialAvatar={getInitialAvatar}
+                            profileData={profileData}
+                            setProfileData={handleProfileData}
+                            initialData={initialData}
+                        />
+                    }
+                />
+                <Route path="/about-us" element={<AboutUsPage />} />
+                <Route
+                    path="/cart"
+                    element={
+                        <CardPage
+                            cartItems={cartItems}
+                            setCartItems={setCartItems}
+                        />
+                    }
+                />
+                <Route path="/checkout" element={
+                    <CheckOut
+                        address='hai phong co bun rieu cuc ngon'
+                        customerName='Nguyen Dang Than'
+                        phone='12345678910'
+                    />} />
             </Routes>
             <Footer />
         </>
@@ -78,3 +134,4 @@ function App() {
 }
 
 export default App;
+

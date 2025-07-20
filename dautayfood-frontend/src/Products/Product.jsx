@@ -1,8 +1,8 @@
-import tranChau from './assets/tran-chau-duong-den.jpg';
-import matcha from './assets/tra-matcha.jpg';
-import mangCau from './assets/tra-mang-cau.jpg';
-import tiramisu from './assets/tiramisu - Copy.jpg';
-import trungMuoi from './assets/bông lan trứng muói.jpg';
+import tranChau from '../assets/tran-chau-duong-den.jpg';
+import matcha from '../assets/tra-matcha.jpg';
+import mangCau from '../assets/tra-mang-cau.jpg';
+import tiramisu from '../assets/tiramisu - Copy.jpg';
+import trungMuoi from '../assets/bông lan trứng muói.jpg';
 
 const products = [
     {
@@ -326,5 +326,8 @@ const products = [
         type: "bong-lan"
     }
 ];
+products.forEach(product => {
+    product.price = parseInt(product.price.replace(/[^\d]/g, ''), 10);
+});
 
 export default products;
