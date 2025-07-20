@@ -16,10 +16,9 @@ function MenuPage({
     handleOpen,
     handleClose
 }) {
-    const showOverlay = !!selectedProduct;
     const [selectedType, setSelectedType] = useState('tat-ca');
     const location = useLocation();
-
+    console.log('products in Menupage: ', Products);
     useEffect(() => {
         if (searchTerm) {
             setSelectedType('tat-ca');
@@ -36,9 +35,9 @@ function MenuPage({
         }
     }, [location]);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    // useEffect(() => {
+    //     window.scrollTo(0, 0);
+    // }, []);
 
     const handleTabChange = (tabId) => {
         setSelectedType(tabId);
@@ -73,7 +72,6 @@ function MenuPage({
                     searchTerm={searchTerm}
                     selectedProduct={selectedProduct}
                     handleAddToCart={handleAddToCart}
-                    showOverlay={showOverlay}
                     handleOpen={handleOpen}
                     handleClose={handleClose}
                 />

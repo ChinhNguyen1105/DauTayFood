@@ -20,10 +20,10 @@ function AvatarMenu({ avatarImage, getInitialAvatar }) {
     }, []);
 
     return (
-        <div className="avatar-menu" ref={menuRef}>
+        <div className="avatar-menu" ref={menuRef} onClick={() => setOpen(!open)}>
             <div
                 className="avatar-trigger"
-                onClick={() => setOpen(!open)}
+
             >
                 {avatarImage ? (
                     <img
@@ -43,7 +43,7 @@ function AvatarMenu({ avatarImage, getInitialAvatar }) {
                     <ul>
                         <Link to='/profile'><li><MdAccountCircle /> Tài khoản</li></Link>
                         <Link> <li><FaCog /> Cài đặt</li></Link>
-                        <Link><li><FaSignOutAlt /> Đăng xuất</li> </Link>
+                        <Link> <li><FaSignOutAlt /> Đăng xuất</li> </Link>
                         <Link to='/login'><li>< FaSignInAlt /> Đăng nhập </li></Link>
                     </ul>
                 </div>

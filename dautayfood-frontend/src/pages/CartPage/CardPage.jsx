@@ -1,14 +1,27 @@
-// CartPage.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CardPage.css';
 import logo from '../../assets/logo.png';
 import OverlayNote from '../../components/OverlayNote/OverlayNote';
 import { useNavigate } from 'react-router-dom';
+import ScrollToTop from '../../ScrollToTop';
 
 function CartPage({ cartItems, setCartItems }) {
     const navigate = useNavigate();
     const [noteProduct, setNoteProduct] = useState(null);
     const [selectedItems, setSelectedItems] = useState([]);
+
+    // Load cart from localStorage khi mở trang
+    useEffect(() => {
+        const savedCart = localStorage.getItem('cartItems');
+        if (savedCart) {
+            setCartItems(JSON.parse(savedCart));
+        }
+    }, [setCartItems]);
+
+    // Update localStorage mỗi khi giỏ hàng thay đổi
+    useEffect(() => {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }, [cartItems]);
 
     const handleSelectItem = (id, checked) => {
         if (checked) {
@@ -52,8 +65,9 @@ function CartPage({ cartItems, setCartItems }) {
     };
 
     const handleRemoveItem = (id) => {
-        setCartItems(prev => prev.filter(item => item.id !== id));
-        setSelectedItems(prev => prev.filter(itemId => itemId !== id));
+        const updatedCart = cartItems.filter(item => item.id !== id);
+        setCartItems(updatedCart);
+        setSelectedItems(selectedItems.filter(itemId => itemId !== id));
     };
 
     const total = cartItems
@@ -70,18 +84,15 @@ function CartPage({ cartItems, setCartItems }) {
             selectedItems.includes(item.id)
         );
 
-        navigate('/checkout', {
-            state: {
-                selectedItems: selectedProducts,
-                customerName: 'Nguyễn Văn A',
-                phone: '0912345678',
-                address: '123 Trần Hưng Đạo, Hà Nội'
-            }
-        });
+        // Lưu selectedItems vào localStorage
+        localStorage.setItem('selectedItems', JSON.stringify(selectedProducts));
+
+        navigate('/checkout');
     };
 
     return (
         <div className="CartPage-container">
+            <ScrollToTop />
             <div className='Cartpage-logo-container'>
                 <img className="CartPage-logo" src={logo} alt="Logo" />
                 <span className='CartPage-slogan'>Giỏ hàng</span>

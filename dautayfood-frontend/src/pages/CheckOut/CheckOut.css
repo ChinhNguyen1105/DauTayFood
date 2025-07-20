@@ -132,3 +132,13 @@
     color: blue;
     font-size: 1rem;
 }
+
+.checkout-youcanlove {
+    margin-top: 50px;
+    align-items: center;
+}
+
+.checkout-youcanlove h4 {
+    display: flex;
+    justify-content: center;
+}

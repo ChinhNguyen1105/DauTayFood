@@ -10,12 +10,9 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 import AboutUsPage from './pages/AboutPage/AboutPage';
 import CardPage from './pages/CartPage/CardPage';
 import Products from './Products/Product';
-import ScrollToTop from './ScrollToTop';
 import CheckOut from './pages/CheckOut/CheckOut';
-
-
+import OrderPage from './pages/OrderPage/OrderPage';
 function App() {
-
     // quản lý sản phẩm đang hiển thị chi tiết
     const [selectedProduct, setSelectedProduct] = useState(null);
     const handleOpen = (product) => setSelectedProduct(product);
@@ -51,9 +48,8 @@ function App() {
     };
 
     const [searchTerm, setSearchTerm] = useState("");
-    const [avatarImage, setAvatarImage] = useState(null);
     const [profileData, setProfileData] = useState(initialData);
-
+    const [avatarImage, setAvatarImage] = useState(null);
     const getInitialAvatar = () => {
         return profileData.loginName.charAt(0).toUpperCase();
     };
@@ -64,7 +60,6 @@ function App() {
 
     return (
         <>
-            <ScrollToTop />
             <Header
                 onSearch={handleSearch}
                 avatarImage={avatarImage}
@@ -123,10 +118,15 @@ function App() {
                 />
                 <Route path="/checkout" element={
                     <CheckOut
-                        address='hai phong co bun rieu cuc ngon'
-                        customerName='Nguyen Dang Than'
-                        phone='12345678910'
+                        Products={Products}
+                        searchTerm={searchTerm}
+                        onSearch={handleSearch}
+                        handleAddToCart={handleAddToCart}
+                        selectedProduct={selectedProduct}
+                        handleOpen={handleOpen}
+                        handleClose={handleClose}
                     />} />
+
             </Routes>
             <Footer />
         </>

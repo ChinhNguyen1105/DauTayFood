@@ -29,7 +29,7 @@ const TypicalProducts = [
         type: "che"
     },
     {
-        id: 52,
+        id: 53,
         name: "Trà măng cầu",
         image: mangCau,
         price: "32.000đ",

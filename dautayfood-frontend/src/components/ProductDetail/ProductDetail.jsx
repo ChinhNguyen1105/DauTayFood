@@ -15,6 +15,25 @@ const ProductDetail = ({
     const [note, setNote] = useState("");
     const navigate = useNavigate(); // dùng để điều hướng
 
+    const handleCheckout = () => {
+        navigate('/checkout', {
+            state: {
+                selectedItems: [{
+                    ...product,
+                    quantity,
+                    note
+                }],
+                customerName: 'Nguyễn Văn A',
+                phone: '0912345678',
+                address: '123 Trần Hưng Đạo, Hà Nội'
+            }
+        });
+        onClose();
+        // console.log('selected Items in checkout', selectedItems);
+    };
+
+
+
     return (
         <div className="product-detail-container">
             <div className="product-detail-closeButton">
@@ -67,8 +86,7 @@ const ProductDetail = ({
                     </div>
                     <div className="product-detail-payButton">
                         <ButtonTry onClick={() => {
-                            handleAddToCart(product, quantity, note);
-                            navigate("/cart#CartPage-container");
+                            handleCheckout();
                             onClose();
                         }}>
                             Thanh toán

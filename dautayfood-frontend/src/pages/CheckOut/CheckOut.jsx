@@ -1,23 +1,72 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './CheckOut.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import ListMenu from '../../components/ListMenu/ListMenu';
+import ScrollToTop from '../../ScrollToTop';
 
-const CheckoutSection = () => {
+const CheckoutSection = ({
+    Products = [],
+    selectedType = "tat-ca",
+    searchTerm = "",
+    selectedProduct,
+    handleAddToCart,
+    handleOpen,
+    handleClose,
+}) => {
     const location = useLocation();
-    const {
-        selectedItems = [],
-        customerName = '',
-        phone = '',
-        address = ''
-    } = location.state || {};
+    const navigate = useNavigate();
+    const [selectedItems, setSelectedItems] = useState([]);
+    const [customerName, setCustomerName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+
+    useEffect(() => {
+        if (location.state && location.state.selectedItems) {
+            setSelectedItems(location.state.selectedItems);
+            setCustomerName(location.state.customerName || '');
+            setPhone(location.state.phone || '');
+            setAddress(location.state.address || '');
+        } else {
+            const savedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
+            setSelectedItems(savedItems);
+            setCustomerName('Nguyễn Văn A');
+            setPhone('0912345678');
+            setAddress('123 Trần Hưng Đạo, Hà Nội');
+        }
+    }, [location.state]);
 
     const totalAmount = selectedItems.reduce((sum, p) => sum + p.price * p.quantity, 0);
     const shipFee = 10000;
     const finalTotal = totalAmount + shipFee;
-    console.log('selectedItems in checkout: ', selectedItems);
+
+    const handleOrder = () => {
+        if (selectedItems.length === 0) {
+            alert("Không có sản phẩm nào để đặt hàng.");
+            return;
+        }
+
+        // Lấy đơn hàng cũ từ localStorage
+        const oldOrders = JSON.parse(localStorage.getItem('orderList')) || [];
+
+        // Tạo đơn hàng mới với trạng thái và ID
+        const newOrders = selectedItems.map(item => ({
+            ...item,
+            id: Date.now() + Math.random(), // tạo id ngẫu nhiên
+            status: "Đang chuẩn bị"
+        }));
+
+        // Gộp và lưu lại
+        const updatedOrders = [...oldOrders, ...newOrders];
+        localStorage.setItem('orderList', JSON.stringify(updatedOrders));
+
+        alert("Đặt hàng thành công!");
+        navigate('/profile', { state: { tab: 'orders' } });
+        // hoặc điều hướng đến trang đơn hàng nếu bạn có
+    };
 
     return (
         <div className="checkout-container">
+            <ScrollToTop />
             <div className="checkout-header">
                 <strong>Địa chỉ nhận hàng:</strong>
                 <p>Khách hàng: {customerName} ({phone})</p>
@@ -63,8 +112,21 @@ const CheckoutSection = () => {
                     <p>Tổng tiền hàng: <span>{totalAmount.toLocaleString()}đ</span></p>
                     <p>Tiền ship: <span>{shipFee.toLocaleString()}đ</span></p>
                     <p className="total-final">Tổng tiền: <span>{finalTotal.toLocaleString()}đ</span></p>
-                    <button className="order-button">Đặt hàng</button>
+                    <button className="order-button" onClick={handleOrder}>Đặt hàng</button>
                 </div>
+            </div>
+
+            <div className='checkout-youcanlove'>
+                <h4>Có thể bạn cũng thích!</h4>
+                <ListMenu
+                    Products={Products}
+                    selectedType={selectedType}
+                    searchTerm={searchTerm}
+                    selectedProduct={selectedProduct}
+                    handleAddToCart={handleAddToCart}
+                    handleOpen={handleOpen}
+                    handleClose={handleClose}
+                />
             </div>
         </div>
     );

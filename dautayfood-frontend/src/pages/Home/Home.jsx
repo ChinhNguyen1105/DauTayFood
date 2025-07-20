@@ -4,12 +4,13 @@ import BigProductCard from '../../components/BigProductCard/BigProductCard.jsx';
 import HeroSection from '../../components/HeroBanner/HeroBanner.jsx';
 import TypicalProducts from '../../Products/TypicalProduct.jsx';
 import ProductForBigCard from '../../Products/ProductForBigCard.jsx';
-
+import ScrollToTop from '../../ScrollToTop';
 function Home({ selectedProduct, handleOpen, handleClose, handleAddToCart }) {
   console.log("value of typical product: ", TypicalProducts);
-  const showOverlay = !!selectedProduct;
+
   return (
     <div className="Home-app-container">
+      <ScrollToTop />
       <main>
         <HeroSection
           backgroundImages={[

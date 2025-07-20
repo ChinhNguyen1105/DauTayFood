@@ -3,7 +3,7 @@ import { ChefHat, Users, Award, Heart, Star, Phone, Mail, MapPin } from 'lucide-
 import './AboutPage.css';
 import banner from '../../assets/banner.png';
 import { Link } from 'react-router-dom';
-
+import ScrollToTop from '../../ScrollToTop';
 const AboutUsPage = () => {
     const [visibleSections, setVisibleSections] = useState(new Set());
 
@@ -32,6 +32,7 @@ const AboutUsPage = () => {
 
     return (
         <div className="AboutPage">
+            <ScrollToTop />
             <section
                 id="hero"
                 data-animate

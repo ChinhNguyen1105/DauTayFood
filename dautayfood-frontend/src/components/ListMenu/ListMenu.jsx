@@ -12,7 +12,6 @@ const ListMenu = ({
     handleOpen,
     handleClose
 }) => {
-    console.log('value of product in menu: ', Products);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12;
     // Improved normalize text function
@@ -70,7 +69,6 @@ const ListMenu = ({
             setCurrentPage(currentPage + 1);
         }
     };
-    console.log("searchTerm nhận được:", searchTerm);
 
     return (
         <div className="list-menu">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './HeroBanner.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const HeroSection = ({
     backgroundImages = [
         "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1920&q=80",
@@ -17,6 +17,7 @@ const HeroSection = ({
     currentSlide = 0,
     autoSlideInterval = 5000 // Auto-slide every 5 seconds
 }) => {
+    const navigate = useNavigate();
     const [timeLeft, setTimeLeft] = useState(initialTime);
     const [activeSlide, setActiveSlide] = useState(currentSlide);
 
@@ -61,6 +62,7 @@ const HeroSection = ({
     const handlePromoClick = () => {
         console.log('Promo button clicked!');
         // Add your promo logic here
+        navigate('/menu#search-linking');
     };
 
     return (
@@ -108,12 +110,12 @@ const HeroSection = ({
                         </div>
 
                         {/* Promotional Button */}
-                        <Link to='/menu#search-linking'> <button
+                        <button
                             className="promo-button"
                             onClick={handlePromoClick}
                         >
                             {promoText}
-                        </button></Link>
+                        </button>
                     </div>
                 </div>
 

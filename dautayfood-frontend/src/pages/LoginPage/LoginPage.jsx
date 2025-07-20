@@ -1,9 +1,10 @@
 import LoginForm from "../../components/LoginForm/LoginForm"
 import '../LoginPage/LoginPage.css';
-
+import ScrollToTop from '../../ScrollToTop';
 const LoginPage = () => {
     return (
         <div className="LoginPage-container">
+            <ScrollToTop />
             <main className="LoginPage-main">
                 <div className="LoginPage-background">
                     <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1920&q=80" />
