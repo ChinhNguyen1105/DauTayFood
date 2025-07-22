@@ -3,6 +3,8 @@ import './CheckOut.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ListMenu from '../../components/ListMenu/ListMenu';
 import ScrollToTop from '../../ScrollToTop';
+import OverlayAddressList from '../../components/OverlayAddressAvai/OverlayAddressAvai';
+import AccountList from '../../components/AccountList/AccountList';
 
 const CheckoutSection = ({
     Products = [],
@@ -15,10 +17,15 @@ const CheckoutSection = ({
 }) => {
     const location = useLocation();
     const navigate = useNavigate();
+
     const [selectedItems, setSelectedItems] = useState([]);
     const [customerName, setCustomerName] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
+
+    const [showAddressModal, setShowAddressModal] = useState(false);
+    const [showSavedAccounts, setShowSavedAccounts] = useState(false);
+    const [selectedBankAccount, setSelectedBankAccount] = useState(null);
 
     useEffect(() => {
         if (location.state && location.state.selectedItems) {
@@ -29,9 +36,16 @@ const CheckoutSection = ({
         } else {
             const savedItems = JSON.parse(localStorage.getItem('selectedItems')) || [];
             setSelectedItems(savedItems);
-            setCustomerName('Nguyễn Văn A');
-            setPhone('0912345678');
-            setAddress('123 Trần Hưng Đạo, Hà Nội');
+        }
+
+        const savedAddresses = JSON.parse(localStorage.getItem('savedAddresses')) || [];
+        if (savedAddresses.length === 0) {
+            setShowAddressModal(true);
+        } else {
+            const defaultAddr = savedAddresses[0];
+            setCustomerName(defaultAddr.fullName);
+            setPhone(defaultAddr.phoneNumber);
+            setAddress(`${defaultAddr.detailAddress}, ${defaultAddr.cityDistrict}`);
         }
     }, [location.state]);
 
@@ -45,23 +59,19 @@ const CheckoutSection = ({
             return;
         }
 
-        // Lấy đơn hàng cũ từ localStorage
         const oldOrders = JSON.parse(localStorage.getItem('orderList')) || [];
 
-        // Tạo đơn hàng mới với trạng thái và ID
         const newOrders = selectedItems.map(item => ({
             ...item,
-            id: Date.now() + Math.random(), // tạo id ngẫu nhiên
+            id: Date.now() + Math.random(),
             status: "Đang chuẩn bị"
         }));
 
-        // Gộp và lưu lại
         const updatedOrders = [...oldOrders, ...newOrders];
         localStorage.setItem('orderList', JSON.stringify(updatedOrders));
 
         alert("Đặt hàng thành công!");
         navigate('/profile', { state: { tab: 'orders' } });
-        // hoặc điều hướng đến trang đơn hàng nếu bạn có
     };
 
     return (
@@ -70,8 +80,24 @@ const CheckoutSection = ({
             <div className="checkout-header">
                 <strong>Địa chỉ nhận hàng:</strong>
                 <p>Khách hàng: {customerName} ({phone})</p>
-                <p>Địa chỉ: <span>{address}</span> <span className="default-label">(mặc định)</span> <span className="change-address">Thay đổi</span></p>
+                <p>
+                    Địa chỉ: <span>{address}</span>
+                    <span className="default-label">(mặc định)</span>
+                    <span className="change-address" onClick={() => setShowAddressModal(true)}>Thay đổi</span>
+                </p>
             </div>
+
+            {showAddressModal && (
+                <OverlayAddressList
+                    onClose={() => setShowAddressModal(false)}
+                    onSelect={(data) => {
+                        setCustomerName(data.fullName);
+                        setPhone(data.phoneNumber);
+                        setAddress(`${data.detailAddress}, ${data.cityDistrict}`);
+                        setShowAddressModal(false);
+                    }}
+                />
+            )}
 
             <div className="checkout-table">
                 <div className="checkout-row header">
@@ -104,10 +130,36 @@ const CheckoutSection = ({
                     <p>Chọn phương thức thanh toán</p>
                     <div className="payment-buttons">
                         <button>Thanh toán khi nhận hàng</button>
-                        <button>Tài khoản ngân hàng</button>
+                        <button onClick={() => setShowSavedAccounts(true)}>Tài khoản ngân hàng</button>
+                        {showSavedAccounts && (
+                            <AccountList
+                                onSelect={(account) => {
+                                    setSelectedBankAccount(account);
+                                    setShowSavedAccounts(false);
+                                }}
+                                onEdit={(index) => {
+                                    console.log('Edit:', index);
+                                }}
+                                onClose={() => setShowSavedAccounts(false)}
+                            />
+                        )}
                     </div>
-                    <p className="terms">Ấn đặt hàng tức là đồng ý với <a className='term' href="#">  Điều khoản</a></p>
+
+                    {/* ✅ Hiển thị tài khoản đã chọn */}
+                    {selectedBankAccount && (
+                        <div className="selected-bank-info">
+
+                            <p>{selectedBankAccount.accountName} - {selectedBankAccount.bank}</p>
+                            <p>Số tài khoản: ****{selectedBankAccount.accountNumber.slice(-4)}</p>
+                        </div>
+                    )}
+
+                    <p className="terms">
+                        Ấn đặt hàng tức là đồng ý với
+                        <a className='term' href="#"> Điều khoản</a>
+                    </p>
                 </div>
+
                 <div className="summary">
                     <p>Tổng tiền hàng: <span>{totalAmount.toLocaleString()}đ</span></p>
                     <p>Tiền ship: <span>{shipFee.toLocaleString()}đ</span></p>

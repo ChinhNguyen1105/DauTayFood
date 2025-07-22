@@ -90,11 +90,16 @@
     margin: 0.5rem 0;
 }
 
+.payment-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
 .payment-buttons button {
-    background-color: #c4bdfc;
+    background-color: #a195ff;
     border: none;
     padding: 0.5rem 1rem;
-    margin-right: 1rem;
+
     cursor: pointer;
     border-radius: 4px;
 }
@@ -141,4 +146,14 @@
 .checkout-youcanlove h4 {
     display: flex;
     justify-content: center;
+}
+
+.selected-bank-info {
+    background-color: #f9f9ff;
+    padding: 7px 16px;
+    margin-top: 6px;
+    border-left: 4px solid #3b82f6;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #111827;
 }
