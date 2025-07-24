@@ -22,6 +22,7 @@ const CheckoutSection = ({
     const [customerName, setCustomerName] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
+    const [PaymentMethod, setPaymentMethod] = useState(null);
 
     const [showAddressModal, setShowAddressModal] = useState(false);
     const [showSavedAccounts, setShowSavedAccounts] = useState(false);
@@ -58,7 +59,14 @@ const CheckoutSection = ({
             alert("Không có sản phẩm nào để đặt hàng.");
             return;
         }
-
+        if (!address) {
+            alert('Bạn chưa thêm địa chỉ giao hàng!');
+            return;
+        }
+        if (!PaymentMethod && !selectedBankAccount) {
+            alert('Bạn chưa chọn phương thức thanh toán!');
+            return;
+        }
         const oldOrders = JSON.parse(localStorage.getItem('orderList')) || [];
 
         const newOrders = selectedItems.map(item => ({
@@ -129,8 +137,15 @@ const CheckoutSection = ({
                 <div className="payment-methods">
                     <p>Chọn phương thức thanh toán</p>
                     <div className="payment-buttons">
-                        <button>Thanh toán khi nhận hàng</button>
-                        <button onClick={() => setShowSavedAccounts(true)}>Tài khoản ngân hàng</button>
+                        <button className='Payment-option'
+                            onClick={() =>
+                                setPaymentMethod('cod')}>
+                            Thanh toán khi nhận hàng</button>
+                        <button className='Payment-option'
+                            onClick={() => {
+                                setShowSavedAccounts(true);
+                                setPaymentMethod('bank')
+                            }}>Tài khoản ngân hàng</button>
                         {showSavedAccounts && (
                             <AccountList
                                 onSelect={(account) => {
@@ -145,7 +160,7 @@ const CheckoutSection = ({
                         )}
                     </div>
 
-                    {/* ✅ Hiển thị tài khoản đã chọn */}
+                    {/*  Hiển thị tài khoản đã chọn */}
                     {selectedBankAccount && (
                         <div className="selected-bank-info">
 

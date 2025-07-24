@@ -42,8 +42,8 @@ function AvatarMenu({ avatarImage, getInitialAvatar }) {
                 <div className="dropdown-menu">
                     <ul>
                         <Link to='/profile'><li><MdAccountCircle /> Tài khoản</li></Link>
-                        <Link> <li><FaCog /> Cài đặt</li></Link>
                         <Link> <li><FaSignOutAlt /> Đăng xuất</li> </Link>
+                        <Link to='/regist'><li>< FaUserPlus /> Đăng ký</li></Link>
                         <Link to='/login'><li>< FaSignInAlt /> Đăng nhập </li></Link>
                     </ul>
                 </div>

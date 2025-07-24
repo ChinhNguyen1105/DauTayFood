@@ -13,6 +13,7 @@ import Products from './Products/Product';
 import CheckOut from './pages/CheckOut/CheckOut';
 import OrderPage from './pages/OrderPage/OrderPage';
 function App() {
+
     // quản lý sản phẩm đang hiển thị chi tiết
     const [selectedProduct, setSelectedProduct] = useState(null);
     const handleOpen = (product) => setSelectedProduct(product);
@@ -132,6 +133,6 @@ function App() {
         </>
     );
 }
-
+localStorage.clear();
 export default App;
 

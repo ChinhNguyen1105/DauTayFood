@@ -16,7 +16,7 @@ const ProductDetail = ({
     const navigate = useNavigate(); // dùng để điều hướng
 
     const handleCheckout = () => {
-        navigate('/checkout', {
+        navigate('/checkout', {// ← navigate lần nữa KHÔNG có state → làm mất state
             state: {
                 selectedItems: [{
                     ...product,
@@ -31,7 +31,6 @@ const ProductDetail = ({
         onClose();
         // console.log('selected Items in checkout', selectedItems);
     };
-
 
 
     return (

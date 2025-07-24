@@ -28,12 +28,11 @@
     display: flex;
     align-items: center;
     height: 100%;
-    margin-left: 30px;
     scale: 100%;
 }
 
 .logo {
-    height: 120px;
+    height: 50px;
     width: auto;
     filter: brightness(0) saturate(100%);
     /* logo sẽ thành màu đen */
@@ -43,10 +42,11 @@
 .nav {
     display: flex;
     align-items: center;
-    margin-left: 0px;
+    margin-right: 40px;
     flex: 1;
-    padding: 20px;
-    gap: 14px;
+    gap: 10px;
+    justify-content: space-between;
+
 }
 
 .nav li {
@@ -55,17 +55,8 @@
     display: inline-block;
 }
 
-a {
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
-}
+.nav li {
 
-.nav li a {
-    color: #fff;
     font-size: 16px;
     font-weight: bold;
     text-decoration: none;
@@ -80,7 +71,7 @@ a {
 .search_box {
     display: flex;
     align-items: center;
-    margin-right: 340px;
+    margin-right: 22em;
     margin-left: auto;
     transition: 0.2s;
 }
@@ -89,7 +80,7 @@ a {
     display: flex;
     align-items: center;
     position: absolute;
-    right: 50px;
+    right: 30px;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -106,53 +97,168 @@ a {
     transition: 0.2s;
 }
 
-#avatar {
-    padding: 10px;
-}
-
 .regist span:hover {
     color: #222;
 }
 
+.header-left-components {
+    margin-left: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Responsive */
-@media (max-width: 900px) {
-    .search_box {
-        margin-right: 100px;
+/* 2. Small Devices (<=576px) */
+@media (max-width: 576px) {
+    #header {
+        display: flex;
+        flex-direction: column;
     }
 
-    .nav {
-        margin-left: 20px;
+    .logo {
+        display: flex;
+        justify-content: center;
+        float: left;
+        height: 70px;
+    }
+
+    .header_container {
+        transition: transform 0.3s ease;
+    }
+
+    .header_container.hidden {
+        transform: translateY(-100%);
     }
 }
 
-@media (max-width: 700px) {
-    .header_container {
-        height: auto;
-    }
-
+/* 3. Medium Devices (<=768px) */
+@media (max-width: 768px) {
     #header {
-        flex-direction: column;
-        height: auto;
-        padding: 10px 0;
+        flex-wrap: wrap;
+        padding: 0.75rem 1rem;
     }
 
     .logobox {
-        margin-left: 0;
-        margin-bottom: 8px;
-    }
-
-    .nav {
-        margin: 0 0 8px 0;
-        flex: none;
-    }
-
-    .search_box {
-        margin: 0 0 8px 0;
+        order: 1;
     }
 
     .regist {
-        position: static;
-        transform: none;
-        margin-bottom: 8px;
+        order: 2;
+        gap: 0.5rem;
+    }
+
+    .nav {
+        order: 4;
+        width: 100%;
+        justify-content: center;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .search_box {
+        order: 3;
+        flex: 1;
+        max-width: none;
+        margin: 0 1rem;
+    }
+
+    .regist span a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .regist span a span {
+        display: none;
+    }
+}
+
+/* 4. Large Devices (<=992px) */
+@media (max-width: 992px) {
+    #header {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .nav {
+        gap: 0.5rem;
+    }
+
+    .nav li a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .nav li a span {
+        display: none;
+    }
+
+    .search_box {
+        max-width: 250px;
+    }
+}
+
+/* 5. Extra Large Devices (<=1200px) */
+@media (max-width: 1200px) {
+    #header {
+        padding: 1rem 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .search_box {
+        max-width: 300px;
+    }
+
+    .nav {
+        gap: 1rem;
+    }
+
+    .nav li a {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Animation for smooth transitions */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header_container {
+    animation: slideDown 0.5s ease-out;
+}
+
+/* Focus states for accessibility */
+.nav li a:focus,
+.regist span a:focus,
+.logobox:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .header_container {
+        background: white !important;
+        box-shadow: none !important;
+        color: black !important;
+    }
+
+    .nav li a,
+    .regist span a {
+        color: black !important;
+        background: transparent !important;
+        border: 1px solid #ccc !important;
     }
 }

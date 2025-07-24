@@ -16,7 +16,8 @@
 
 /* Sidebar Styles */
 .profile-sidebar {
-    width: 280px;
+    box-sizing: border-box;
+
     background-color: #e8e8e8;
     padding: 30px 20px;
     border-right: 1px solid #ddd;
@@ -243,6 +244,8 @@
 /* Avatar Section */
 .avatar-section {
     display: flex;
+    box-sizing: border-box;
+    width: 150px;
     justify-items: center;
     flex-direction: column;
     gap: 30px;
@@ -299,7 +302,7 @@
 .edit-section {
     display: flex;
     flex-direction: row;
-    gap: 80px;
+    gap: 30px;
     justify-items: center;
 }
 
