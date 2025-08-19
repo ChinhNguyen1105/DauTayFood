@@ -1,55 +1,61 @@
-import { useState, useRef, useEffect } from 'react';
-import './AvatarMenu.css';
-import { Link } from 'react-router-dom';
-import { FaUserPlus, FaSignInAlt, FaCog, FaSignOutAlt } from 'react-icons/fa';
-import { MdAccountCircle } from 'react-icons/md';
-// Sửa cách khai báo props bằng cách dùng object destructuring
-function AvatarMenu({ avatarImage, getInitialAvatar }) {
-    const [open, setOpen] = useState(false);
-    const menuRef = useRef(null);
+import { useState, useRef, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { FaUserPlus, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa'
+import { MdAccountCircle } from 'react-icons/md'
 
-    // Đóng menu khi click ra ngoài
+function AvatarMenu({ avatarImage, getInitialAvatar }) {
+    const [open, setOpen] = useState(false)
+    const menuRef = useRef(null)
+
+    // Click ra ngoài sẽ đóng menu
     useEffect(() => {
-        function handleClickOutside(event) {
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setOpen(false);
+        function handleClickOutside(e) {
+            if (menuRef.current && !menuRef.current.contains(e.target)) {
+                setOpen(false)
             }
         }
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
 
     return (
-        <div className="avatar-menu" ref={menuRef} onClick={() => setOpen(!open)}>
+        <div className="relative " ref={menuRef}>
+            {/* Trigger */}
             <div
-                className="avatar-trigger"
-
+                className="w-10 h-10 bg-indigo-500 text-white rounded-full flex items-center justify-center font-bold border-2 border-white cursor-pointer"
+                onClick={() => setOpen((prev) => !prev)}
             >
                 {avatarImage ? (
-                    <img
-                        src={avatarImage}
-                        alt="User avatar"
-                        className="avatar-img"
-                    />
+                    <img src={avatarImage} alt="User avatar" className="w-10 h-10 rounded-full object-cover" />
                 ) : (
-                    <span className="AvatarMenu-avatar-initial">
-                        {getInitialAvatar()}
-                    </span>
+                    <span>{getInitialAvatar()}</span>
                 )}
             </div>
 
-            {open && (
-                <div className="dropdown-menu">
-                    <ul>
-                        <Link to='/profile'><li><MdAccountCircle /> Tài khoản</li></Link>
-                        <Link> <li><FaSignOutAlt /> Đăng xuất</li> </Link>
-                        <Link to='/regist'><li>< FaUserPlus /> Đăng ký</li></Link>
-                        <Link to='/login'><li>< FaSignInAlt /> Đăng nhập </li></Link>
-                    </ul>
-                </div>
-            )}
+            {/* Dropdown */}
+            <div
+                className={`absolute top-[52px] right-0 min-w-[160px] bg-white rounded-lg shadow-lg py-2 z-50
+          transition-all duration-300 ease-out transform
+          ${open ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}`}
+            >
+                <div className="absolute top-[-10px] right-4 w-0 h-0 border-x-8 border-x-transparent border-b-[12px] border-b-white drop-shadow-sm"></div>
+                <ul className="list-none m-0 p-0 text-sm">
+                    <li className="px-4 py-2 hover:bg-pink-100 hover:text-pink-600 cursor-pointer flex items-center gap-2 font-bold" >
+                        <MdAccountCircle /> <Link to="/profile">Tài khoản</Link>
+                    </li>
+                    <li className="px-4 py-2 hover:bg-pink-100 hover:text-pink-600 cursor-pointer flex items-center gap-2 font-bold">
+                        <FaSignOutAlt /> <Link to="/">Đăng xuất</Link>
+                    </li>
+                    <li className="px-4 py-2 hover:bg-pink-100 hover:text-pink-600 cursor-pointer flex items-center gap-2 font-bold">
+                        <FaUserPlus /> <Link to="/regist">Đăng ký</Link>
+                    </li>
+                    <li className="px-4 py-2 hover:bg-pink-100 hover:text-pink-600 cursor-pointer flex items-center gap-2 font-bold">
+                        <FaSignInAlt /> <Link to="/login">Đăng nhập</Link>
+                    </li>
+                </ul>
+            </div>
         </div>
-    );
+    )
 }
 
-export default AvatarMenu;
+export default AvatarMenu

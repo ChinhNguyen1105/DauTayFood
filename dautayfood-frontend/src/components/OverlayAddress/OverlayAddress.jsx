@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import './OverlayAddress.css';
+import React, { useState, useEffect } from "react";
 
 const OverlayAddress = ({ onClose, onAddAddress, initialData = null }) => {
-    const [addressType, setAddressType] = useState('home');
-    const [fullName, setFullName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [cityDistrict, setCityDistrict] = useState('');
-    const [detailAddress, setDetailAddress] = useState('');
+    const [addressType, setAddressType] = useState("home");
+    const [fullName, setFullName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [cityDistrict, setCityDistrict] = useState("");
+    const [detailAddress, setDetailAddress] = useState("");
     const [editIndex, setEditIndex] = useState(null);
 
     useEffect(() => {
         if (initialData) {
-            setFullName(initialData.fullName || '');
-            setPhoneNumber(initialData.phoneNumber || '');
-            setCityDistrict(initialData.cityDistrict || '');
-            setDetailAddress(initialData.detailAddress || '');
-            setAddressType(initialData.addressType || 'home');
+            setFullName(initialData.fullName || "");
+            setPhoneNumber(initialData.phoneNumber || "");
+            setCityDistrict(initialData.cityDistrict || "");
+            setDetailAddress(initialData.detailAddress || "");
+            setAddressType(initialData.addressType || "home");
             setEditIndex(initialData.index ?? null);
         }
     }, [initialData]);
 
     const handleSave = () => {
         if (!fullName || !phoneNumber || !cityDistrict || !detailAddress) {
-            alert('Vui lòng điền đầy đủ thông tin');
+            alert("Vui lòng điền đầy đủ thông tin");
             return;
         }
 
         const phoneRegex = /^[0-9]{10,11}$/;
         if (!phoneRegex.test(phoneNumber)) {
-            alert('Số điện thoại không hợp lệ');
+            alert("Số điện thoại không hợp lệ");
             return;
         }
 
@@ -41,7 +40,7 @@ const OverlayAddress = ({ onClose, onAddAddress, initialData = null }) => {
         };
 
         let updated = [];
-        const existing = JSON.parse(localStorage.getItem('savedAddresses')) || [];
+        const existing = JSON.parse(localStorage.getItem("savedAddresses")) || [];
 
         if (editIndex !== null) {
             updated = [...existing];
@@ -50,8 +49,8 @@ const OverlayAddress = ({ onClose, onAddAddress, initialData = null }) => {
             updated = [...existing, addressData];
         }
 
-        localStorage.setItem('savedAddresses', JSON.stringify(updated));
-        alert('Đã lưu địa chỉ thành công!');
+        localStorage.setItem("savedAddresses", JSON.stringify(updated));
+        alert("Đã lưu địa chỉ thành công!");
 
         if (onAddAddress) {
             onAddAddress(addressData);
@@ -61,88 +60,120 @@ const OverlayAddress = ({ onClose, onAddAddress, initialData = null }) => {
     };
 
     return (
-        <div className="OverlayAddress-overlay" onClick={(e) => e.target.className === 'OverlayAddress-overlay' && onClose()}>
-            <div className="OverlayAddress-modal">
-                <button className="OverlayAddress-close-btn" onClick={onClose}>&times;</button>
+        <div
+            className="fixed inset-0 bg-black/50 flex justify-center items-center z-50"
+            onClick={(e) => e.target.classList.contains("fixed") && onClose()}
+        >
+            <div
+                className="
+          bg-white w-full max-w-md md:max-w-2xl lg:max-w-3xl
+          h-auto max-h-[90vh] md:max-h-[85vh]
+          rounded-lg shadow-xl flex flex-col relative
+        "
+            >
+                {/* Close button */}
+                <button
+                    className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl"
+                    onClick={onClose}
+                >
+                    &times;
+                </button>
 
-                <div className="OverlayAddress-header">
-                    <div className="OverlayAddress-breadcrumb">
-                        <a href="#" onClick={onClose}>thay đổi địa chỉ</a>
-                    </div>
-                    <h2 className="OverlayAddress-title">{editIndex !== null ? 'Chỉnh sửa địa chỉ' : 'Địa chỉ mới'}</h2>
+                {/* Header */}
+                <div className="p-4 md:p-6 border-b border-gray-200">
+                    <h2 className="text-lg md:text-xl font-semibold text-gray-800">
+                        {editIndex !== null ? "Chỉnh sửa địa chỉ" : "Địa chỉ mới"}
+                    </h2>
                 </div>
 
-                <div className="OverlayAddress-body">
-                    <form className="OverlayAddress-form">
-                        <div className="OverlayAddress-row">
+                {/* Body */}
+                <div className="flex-1 p-4 md:p-6 overflow-y-auto">
+                    <form className="flex flex-col gap-3 md:gap-4 text-sm md:text-base">
+                        <div className="flex flex-col md:flex-row gap-3">
                             <input
                                 type="text"
-                                className="OverlayAddress-input"
                                 placeholder="Họ và tên"
+                                className="w-full px-3 py-2 md:px-4 md:py-3 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                                 value={fullName}
                                 onChange={(e) => setFullName(e.target.value)}
                             />
                             <input
                                 type="tel"
-                                className="OverlayAddress-input"
                                 placeholder="Số điện thoại"
+                                className="w-full px-3 py-2 md:px-4 md:py-3 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                             />
                         </div>
+
                         <input
                             type="text"
-                            className="OverlayAddress-input"
                             placeholder="Tỉnh/Thành phố, Quận/Huyện, Phường/Xã"
+                            className="w-full px-3 py-2 md:px-4 md:py-3 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
                             value={cityDistrict}
                             onChange={(e) => setCityDistrict(e.target.value)}
                         />
+
                         <textarea
-                            className="OverlayAddress-input OverlayAddress-textarea"
                             placeholder="Địa chỉ cụ thể"
+                            className="w-full px-3 py-2 md:px-4 md:py-3 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 min-h-[70px] md:min-h-[100px]"
                             value={detailAddress}
                             onChange={(e) => setDetailAddress(e.target.value)}
                         />
 
-                        <div className="OverlayAddress-map">
+                        {/* Map section */}
+                        <div className="h-[100px] md:h-[150px] bg-gray-100 rounded-md flex items-center justify-center">
                             <button
                                 type="button"
-                                className="OverlayAddress-map-btn"
-                                onClick={() => alert('Tính năng đang phát triển')}
+                                className="px-4 py-2 border border-gray-300 rounded-md text-sm text-gray-600 hover:border-blue-500 hover:text-blue-500"
+                                onClick={() => alert("Tính năng đang phát triển")}
                             >
                                 Thêm vị trí
                             </button>
                         </div>
 
-                        <div className="OverlayAddress-type-section">
-                            <div className="OverlayAddress-label">Loại địa chỉ:
-                                <div className="OverlayAddress-type-buttons">
+                        {/* Address type */}
+                        <div>
+                            <span className="block mb-1 text-gray-700 font-medium">
+                                Loại địa chỉ:
+                            </span>
+                            <div className="flex flex-wrap gap-2">
+                                {["home", "office", "other"].map((type) => (
                                     <button
+                                        key={type}
                                         type="button"
-                                        className={`OverlayAddress-type-btn ${addressType === 'home' ? 'active' : ''}`}
-                                        onClick={() => setAddressType('home')}
+                                        className={`flex-1 min-w-[90px] px-3 py-2 border rounded-md text-sm md:text-base ${addressType === type
+                                            ? "bg-blue-500 text-white border-blue-500"
+                                            : "border-gray-300 text-gray-600 hover:border-blue-500 hover:text-blue-500"
+                                            }`}
+                                        onClick={() => setAddressType(type)}
                                     >
-                                        Nhà Riêng
+                                        {type === "home"
+                                            ? "Nhà riêng"
+                                            : type === "office"
+                                                ? "Văn phòng"
+                                                : "Khác"}
                                     </button>
-                                    <button
-                                        type="button"
-                                        className={`OverlayAddress-type-btn ${addressType === 'office' ? 'active' : ''}`}
-                                        onClick={() => setAddressType('office')}
-                                    >
-                                        Văn Phòng
-                                    </button>
-                                </div>
+                                ))}
                             </div>
-
                         </div>
                     </form>
                 </div>
 
-                <div className="OverlayAddress-footer">
-                    <button type="button" className="OverlayAddress-btn OverlayAddress-btn-secondary" onClick={onClose}>
+                {/* Footer */}
+                <div className="p-4 md:p-6 border-t border-gray-200 flex justify-end gap-3">
+                    <button
+                        type="button"
+                        className="px-4 py-2 bg-gray-100 text-gray-600 rounded-md hover:bg-gray-200 text-sm md:text-base"
+                        onClick={onClose}
+                    >
                         Trở lại
                     </button>
-                    <button type="button" className="OverlayAddress-btn OverlayAddress-btn-primary" onClick={handleSave}>
+                    <button
+                        type="button"
+                        className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 text-sm md:text-base"
+                        onClick={handleSave}
+                    >
                         Hoàn tất
                     </button>
                 </div>

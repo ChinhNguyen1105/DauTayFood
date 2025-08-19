@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import Banner from '../../assets/banner.png';
 import FilterTabs from '../../components/FilterTabs/FilterTabs';
 import TrendProduct from '../../components/TrendProduct/TrendProduct';
-import './MenuPage.css';
 import ListMenu from '../../components/ListMenu/ListMenu';
 import PropTypes from 'prop-types';
 
@@ -18,7 +17,7 @@ function MenuPage({
 }) {
     const [selectedType, setSelectedType] = useState('tat-ca');
     const location = useLocation();
-    console.log('products in Menupage: ', Products);
+
     useEffect(() => {
         if (searchTerm) {
             setSelectedType('tat-ca');
@@ -35,10 +34,6 @@ function MenuPage({
         }
     }, [location]);
 
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-    // }, []);
-
     const handleTabChange = (tabId) => {
         setSelectedType(tabId);
         if (tabId === 'tat-ca' && onSearch) {
@@ -48,24 +43,36 @@ function MenuPage({
 
     return (
         <div>
-            <img className='banner' src={Banner} alt="banner" />
-            <div className='MenuPage-section1-title'>
-                <h2 className="MenuPage-section-title">top món ngon hàng tuần</h2>
+            <img
+                className="w-screen h-screen object-cover mt-5"
+                src={Banner}
+                alt="banner"
+            />
+
+            <div className="relative bg-[#dbffcb] p-3 text-center -mt-12 z-10">
+                <h2 className="text-[1.4rem] font-semibold text-[#222] tracking-wider">
+                    top món ngon hàng tuần
+                </h2>
             </div>
+
             <TrendProduct
                 selectedProduct={selectedProduct}
                 handleAddToCart={handleAddToCart}
                 handleOpen={handleOpen}
                 handleClose={handleClose}
             />
-            <div className='MenuPage-section2-title'>
-                <h2 className="MenuPage-section-title">Big Menu</h2>
+
+            <div className="relative bg-[#dbffcb] p-3 text-center -mt-12 z-10">
+                <h2 className="text-[1.4rem] font-semibold text-[#222] tracking-wider">
+                    Big Menu
+                </h2>
             </div>
-            <div className='MenuPage-ListMenu-container' id='search-linking'>
-                <FilterTabs
-                    activeTab={selectedType}
-                    onTabChange={handleTabChange}
-                />
+
+            <div
+                id="search-linking"
+                className="bg-gradient-to-b from-[#ff8080] to-[#d4ece0] z-[100] mx-auto max-w-[100%]"
+            >
+                <FilterTabs activeTab={selectedType} onTabChange={handleTabChange} />
                 <ListMenu
                     Products={Products}
                     selectedType={selectedType}

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './CheckOut.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ListMenu from '../../components/ListMenu/ListMenu';
 import ScrollToTop from '../../ScrollToTop';
@@ -83,15 +82,22 @@ const CheckoutSection = ({
     };
 
     return (
-        <div className="checkout-container">
+        <div className="px-6 py-8 bg-white font-sans max-w-6xl mx-auto mt-24 mb-12 text-black">
             <ScrollToTop />
-            <div className="checkout-header">
+
+            {/* Header */}
+            <div className="bg-gray-200 p-4 mb-8 rounded">
                 <strong>Địa chỉ nhận hàng:</strong>
                 <p>Khách hàng: {customerName} ({phone})</p>
                 <p>
                     Địa chỉ: <span>{address}</span>
-                    <span className="default-label">(mặc định)</span>
-                    <span className="change-address" onClick={() => setShowAddressModal(true)}>Thay đổi</span>
+                    <span className="text-red-500 text-sm ml-2">(mặc định)</span>
+                    <span
+                        className="text-blue-600 font-semibold ml-3 cursor-pointer"
+                        onClick={() => setShowAddressModal(true)}
+                    >
+                        Thay đổi
+                    </span>
                 </p>
             </div>
 
@@ -107,84 +113,151 @@ const CheckoutSection = ({
                 />
             )}
 
-            <div className="checkout-table">
-                <div className="checkout-row header">
-                    <div>Sản phẩm</div>
-                    <div>Đơn giá</div>
-                    <div>Số Lượng</div>
-                    <div>Thành tiền</div>
+            {/* Table */}
+            <div className="bg-gray-200 p-4 rounded">
+                {/* Header */}
+                <div className="hidden md:grid grid-cols-[2fr_1fr_1fr_1fr] items-center text-center gap-4 font-semibold border-b-2 border-slate-500 pb-2">
+                    <div className="text-left pl-24">Sản phẩm</div>
+                    <div>Giá</div>
+                    <div>Số lượng</div>
+                    <div>Tổng</div>
                 </div>
+                {/* Header mobile */}
+                <div className="md:hidden grid grid-cols-4 text-sm font-semibold text-black-600 border-b border-slate-500 pb-1 items-center justify-items-center ">
+                    <div>Sản phẩm</div>
+                    <div>Giá</div>
+                    <div>Số lượng</div>
+                    <div className="text-right">Tổng</div>
+                </div>
+
                 {selectedItems.map((item, index) => (
-                    <div className="checkout-row" key={index}>
-                        <div className="product-info">
-                            <img src={item.image} alt={item.name} />
-                            <div>
-                                <p className="product-name">{item.name}</p>
-                                <p className="product-note">Ghi chú: <span>{item.note}</span></p>
+                    <div key={index} className="py-4 border-b border-gray-400">
+
+                        {/* Desktop view */}
+                        <div className="hidden md:grid grid-cols-[2fr_1fr_1fr_1fr] items-center text-center gap-4">
+                            {/* Cột sản phẩm */}
+                            <div className="flex items-center gap-4 justify-start">
+                                <img
+                                    src={item.image}
+                                    alt={item.name}
+                                    className="w-20 h-20 object-cover rounded"
+                                />
+                                <div className="text-left min-w-0">
+                                    <p className="font-semibold truncate">{item.name}</p>
+                                    <p className="text-red-500 text-sm break-words">
+                                        Ghi chú: {item.note}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Cột giá */}
+                            <div>{item.price.toLocaleString()}đ</div>
+
+                            {/* Cột số lượng */}
+                            <div>{item.quantity}</div>
+
+                            {/* Cột tổng */}
+                            <div>{(item.price * item.quantity).toLocaleString()}đ</div>
+                        </div>
+
+                        {/* Mobile view (giữ nguyên code cũ) */}
+                        <div className="block md:hidden">
+                            <div className="grid grid-cols-4 items-center justify-items-center">
+                                <div className="flex items-center gap-4">
+                                    <img
+                                        src={item.image}
+                                        alt={item.name}
+                                        className="w-20 h-20 object-cover rounded"
+                                    />
+                                </div>
+                                <div>{item.price.toLocaleString()}đ</div>
+                                <div>{item.quantity}</div>
+                                <div>{(item.price * item.quantity).toLocaleString()}đ</div>
+                            </div>
+                            <div className="mt-2">
+                                <p className="font-semibold text-sm mb-2">{item.name}</p>
+                                <p className="text-red-500 text-sm break-words">
+                                    Ghi chú: <span>{item.note}</span>
+                                </p>
                             </div>
                         </div>
-                        <div>{item.price.toLocaleString()}đ</div>
-                        <div>{item.quantity}</div>
-                        <div>{(item.price * item.quantity).toLocaleString()}đ</div>
                     </div>
                 ))}
-                <div className="checkout-total">
-                    Tổng số tiền ({selectedItems.length} sản phẩm): <span>{totalAmount.toLocaleString()}đ</span>
+
+                <div className="text-right font-semibold text-red-500 p-4">
+                    Tổng số tiền ({selectedItems.length} sản phẩm):{" "}
+                    <span>{totalAmount.toLocaleString()}đ</span>
                 </div>
             </div>
 
-            <div className="checkout-footer">
-                <div className="payment-methods">
-                    <p>Chọn phương thức thanh toán</p>
-                    <div className="payment-buttons">
-                        <button className='Payment-option'
-                            onClick={() =>
-                                setPaymentMethod('cod')}>
-                            Thanh toán khi nhận hàng</button>
-                        <button className='Payment-option'
+            {/* Footer */}
+            <div className="flex flex-col md:flex-row justify-between mt-8 bg-gray-200 p-4 rounded gap-6">
+                {/* Payment */}
+                <div className="flex-1">
+                    <p className="mb-2">Chọn phương thức thanh toán</p>
+                    <div className="flex gap-4">
+                        <button
+                            className="bg-indigo-400 text-white text-sm md:text-lg px-4 py-2 rounded hover:bg-indigo-500"
+                            onClick={() => setPaymentMethod('cod')}
+                        >
+                            Thanh toán khi nhận hàng
+                        </button>
+                        <button
+                            className="bg-indigo-400 text-white px-4 text-sm md:text-lg py-2 rounded hover:bg-indigo-500"
                             onClick={() => {
                                 setShowSavedAccounts(true);
-                                setPaymentMethod('bank')
-                            }}>Tài khoản ngân hàng</button>
-                        {showSavedAccounts && (
-                            <AccountList
-                                onSelect={(account) => {
-                                    setSelectedBankAccount(account);
-                                    setShowSavedAccounts(false);
-                                }}
-                                onEdit={(index) => {
-                                    console.log('Edit:', index);
-                                }}
-                                onClose={() => setShowSavedAccounts(false)}
-                            />
-                        )}
+                                setPaymentMethod('bank');
+                            }}
+                        >
+                            Tài khoản ngân hàng
+                        </button>
                     </div>
 
-                    {/*  Hiển thị tài khoản đã chọn */}
-                    {selectedBankAccount && (
-                        <div className="selected-bank-info">
+                    {showSavedAccounts && (
+                        <AccountList
+                            onSelect={(account) => {
+                                setSelectedBankAccount(account);
+                                setShowSavedAccounts(false);
+                            }}
+                            onEdit={(index) => {
+                                console.log('Edit:', index);
+                            }}
+                            onClose={() => setShowSavedAccounts(false)}
+                        />
+                    )}
 
+                    {selectedBankAccount && (
+                        <div className="bg-indigo-50 p-3 mt-2 border-l-4 border-blue-500 rounded text-sm text-gray-800">
                             <p>{selectedBankAccount.accountName} - {selectedBankAccount.bank}</p>
                             <p>Số tài khoản: ****{selectedBankAccount.accountNumber.slice(-4)}</p>
                         </div>
                     )}
 
-                    <p className="terms">
+                    <p className="text-sm mt-3">
                         Ấn đặt hàng tức là đồng ý với
-                        <a className='term' href="#"> Điều khoản</a>
+                        <a href="#" className="text-blue-600 ml-1">Điều khoản</a>
                     </p>
                 </div>
 
-                <div className="summary">
+                {/* Summary */}
+                <div className="text-right flex-1">
                     <p>Tổng tiền hàng: <span>{totalAmount.toLocaleString()}đ</span></p>
                     <p>Tiền ship: <span>{shipFee.toLocaleString()}đ</span></p>
-                    <p className="total-final">Tổng tiền: <span>{finalTotal.toLocaleString()}đ</span></p>
-                    <button className="order-button" onClick={handleOrder}>Đặt hàng</button>
+                    <p className="font-bold text-red-500">
+                        Tổng tiền: <span>{finalTotal.toLocaleString()}đ</span>
+                    </p>
+                    <button
+                        className="mt-4 bg-red-400 hover:bg-red-500 text-white px-6 py-2 rounded-lg text-lg"
+                        onClick={handleOrder}
+                    >
+                        Đặt hàng
+                    </button>
                 </div>
             </div>
 
-            <div className='checkout-youcanlove'>
-                <h4>Có thể bạn cũng thích!</h4>
+            {/* Recommend */}
+            <div className="mt-12">
+                <h4 className="flex justify-center font-bold text-2xl text-gray-700 mb-6">Có thể bạn cũng thích!</h4>
                 <ListMenu
                     Products={Products}
                     selectedType={selectedType}

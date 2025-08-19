@@ -12,6 +12,8 @@ import CardPage from './pages/CartPage/CardPage';
 import Products from './Products/Product';
 import CheckOut from './pages/CheckOut/CheckOut';
 import OrderPage from './pages/OrderPage/OrderPage';
+import SideBar from './components/DropDownMenu/DropDownMenu';
+
 function App() {
 
     // quản lý sản phẩm đang hiển thị chi tiết
@@ -61,6 +63,7 @@ function App() {
 
     return (
         <>
+            <SideBar/>
             <Header
                 onSearch={handleSearch}
                 avatarImage={avatarImage}

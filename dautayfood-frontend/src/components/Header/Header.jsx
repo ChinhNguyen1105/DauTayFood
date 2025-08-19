@@ -1,13 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css';
-import { FaShoppingCart, FaSearch, FaSignInAlt, FaBars, FaInfoCircle, FaUserPlus } from 'react-icons/fa';
 import logo from '../../assets/logo.png';
 import AvatarMenu from '../../components/AvatarMenu/AvatarMenu';
-import SearchBox from "../SearchBox/SearchBox";
-import { useEffect, useState } from 'react';
-import SideBar from '../DropDownMenu/DropDownMenu';
-import { Sidebar } from 'lucide-react';
+import SearchBox from '../SearchBox/SearchBox';
 
 const Header = ({ onSearch, avatarImage, getInitialAvatar }) => {
     const [hideHeader, setHideHeader] = useState(false);
@@ -16,39 +11,53 @@ const Header = ({ onSearch, avatarImage, getInitialAvatar }) => {
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollPos = window.scrollY;
-
-            if (currentScrollPos > prevScrollPos && currentScrollPos > 100) {
-                setHideHeader(true); // Scroll xuống → ẩn
-            } else {
-                setHideHeader(false); // Scroll lên → hiện
-            }
-
+            setHideHeader(currentScrollPos > prevScrollPos && currentScrollPos > 100);
             setPrevScrollPos(currentScrollPos);
         };
-
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [prevScrollPos]);
 
     return (
-        <header className={`header_container ${hideHeader ? 'hidden' : ''}`}>
-            <div id='header'>
-                <div className='header-left-components'>
-                    <div className='header-sidebar'><SideBar /></div>
-                    <Link to='/' className='logobox'>
-                        <img src={logo} alt="Logo" className='logo' />
+        <header
+            className={`fixed top-0 left-0 w-full z-[1000] bg-gradient-to-b from-[#FF8282] to-[#ff8282a2] shadow-md transition-transform duration-300 ease-in-out ${hideHeader ? '-translate-y-full' : 'translate-y-0'
+                }`}
+        >
+            <div className="flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8 py-3 gap-3 w-full">
+
+                {/* Mobile: Logo + Avatar cùng hàng */}
+                <div className="relative flex sm:hidden w-full">
+                    <Link to="/">
+                        <img src={logo} alt="Logo"
+                            className="h-10 w-auto brightness-0 saturate-100 absolute left-1/2 transform -translate-x-1/2" />
+                    </Link>
+                    <div className='ml-auto'><AvatarMenu avatarImage={avatarImage} getInitialAvatar={getInitialAvatar} /></div>
+
+                </div>
+
+                {/* Mobile: SearchBox nằm dưới */}
+                <div className="block sm:hidden w-full">
+                    <SearchBox onSearch={onSearch} />
+                </div>
+
+                {/* Desktop: Logo bên trái */}
+                <div className="hidden sm:flex sm:items-center sm:justify-start sm:gap-4 sm:w-1/3 sm:ml-20">
+                    <Link to="/" className="flex items-center">
+                        <img src={logo} alt="Logo" className="h-12 w-auto brightness-0 saturate-100" />
                     </Link>
                 </div>
 
-                <div className="search_box">
-                    <SearchBox onSearch={onSearch} setResetType={"tat-ca"} />
-                </div>
-                {/* Đăng nhập */}
-                <div className="regist">
-                    <div id='avatar'><AvatarMenu avatarImage={avatarImage} getInitialAvatar={getInitialAvatar} /> </div>
+                {/* Desktop: SearchBox + Avatar bên phải */}
+                <div className="hidden sm:flex sm:items-center sm:justify-end gap-4 sm:w-2/3">
+                    <div className="flex-1">
+                        <SearchBox onSearch={onSearch} />
+                    </div>
+                    <div className="flex-shrink-0">
+                        <AvatarMenu avatarImage={avatarImage} getInitialAvatar={getInitialAvatar} />
+                    </div>
                 </div>
             </div>
-        </header >
+        </header>
     );
 };
 

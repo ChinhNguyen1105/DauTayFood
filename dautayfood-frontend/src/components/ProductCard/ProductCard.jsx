@@ -1,52 +1,70 @@
 import React from 'react';
-import './ProductCard.css';
-import ButtonTry from '../ButtonTry/ButtonTry';
 import ProductDetail from '../ProductDetail/ProductDetail';
 import PropTypes from 'prop-types';
+import OverlayPortal from '../OverlayPortal/OverlayPortal';
 
-function ProductCard({
+const ProductCard = ({
     product,
     selectedProduct,
     handleAddToCart,
     handleOpen,
     handleClose
-}) {
-    if (!product) return null; // tránh lỗi undefined
+}) => {
+    if (!product) return null;
+
     const isOverlayVisible = selectedProduct?.id === product.id;
+
     return (
         <>
-            <div className="product-card">
-                <img
-                    src={product.image}
-                    alt={product.name}
-                    className="product-img"
-                    onError={(e) => {
-                        console.error('Image failed to load:', product.image);
-                        e.target.src = 'fallback-image-path.jpg';
-                    }}
-                />
-                <h3 className="product-price">{product.price.toLocaleString()}đ</h3>
-                <h3 className="product-name">{product.name}</h3>
-                <div className="product-type">Mã loại: {product.type}</div>
-                <div className="ButtonTry">
-                    <ButtonTry onClick={() => handleOpen(product)}>thử ngay</ButtonTry>
+            {/* Card hiển thị sản phẩm */}
+            <div
+                className="w-[170px] sm:w-[180px] rounded-md overflow-hidden bg-[#D4ECE0] shadow border hover:shadow-lg cursor-pointer transition"
+                onClick={(e) => {
+                    e.stopPropagation();           // optional: ngăn bubbling nếu cần
+                    console.log('open product', product.id);
+                    handleOpen(product);
+                }}
+            >
+                <div className="relative w-full h-[160px] sm:h-[180px] overflow-hidden">
+                    <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover transition duration-200 hover:brightness-90"
+                        onError={(e) => {
+                            e.target.src = 'https://via.placeholder.com/160x180/f3f4f6/9ca3af?text=No+Image';
+                        }}
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-white bg-opacity-55 text-red-500 text-sm font-semibold px-2 py-1">
+                        {product.price.toLocaleString()}đ
+                    </div>
+                </div>
+                <div className="p-2 flex flex-col">
+                    <div className="text-xs text-gray-800 line-clamp-2 leading-tight h-[2rem]">
+                        {product.name}
+                    </div>
+                    <div className="text-red-400 text-[0.7rem]">
+                        Phân loại: {product.type}
+                    </div>
                 </div>
             </div>
 
+            {/* Overlay hiển thị chi tiết sản phẩm */}
             {isOverlayVisible && (
-                <div className="overlay">
-                    <div className="detail-box">
+                <OverlayPortal onClickOutside={handleClose}>
+                    <div
+                        onClick={(e) => e.stopPropagation()} // tránh click trong modal đóng lại
+                    >
                         <ProductDetail
                             product={product}
                             onClose={handleClose}
                             handleAddToCart={handleAddToCart}
                         />
                     </div>
-                </div>
+                </OverlayPortal>
             )}
         </>
     );
-}
+};
 
 ProductCard.propTypes = {
     product: PropTypes.shape({
@@ -54,7 +72,7 @@ ProductCard.propTypes = {
         name: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
-        type: PropTypes.oneOf(['tra-sua', 'che', 'banh-trang', 'bong-lan']).isRequired,
+        type: PropTypes.string,
         description: PropTypes.string
     }),
     selectedProduct: PropTypes.object,

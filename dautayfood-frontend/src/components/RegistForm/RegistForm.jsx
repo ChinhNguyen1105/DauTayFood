@@ -1,5 +1,4 @@
 import { useState } from "react";
-import './RegistForm.css';
 import { Link } from "react-router-dom";
 
 const RegistForm = () => {
@@ -29,14 +28,9 @@ const RegistForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (validate()) {//neu hop le
+        if (validate()) {
             alert("Đăng ký thành công!");
-            console.log({
-                fullName,
-                email,
-                passWord
-            });
-            // Reset form (tùy chọn)
+            console.log({ fullName, email, passWord });
             setFullName("");
             setEmail("");
             setPassWord("");
@@ -46,53 +40,77 @@ const RegistForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="RegistForm">
-            <div className="regist-form-title">
-                <h2>Đăng Ký</h2>
+        <form
+            onSubmit={handleSubmit}
+            className="w-80 lg:w-full max-w-2xl bg-white/20 backdrop-blur-md rounded-xl shadow-2xl p-8 animate-slide-up"
+        >
+            <div className="text-center mb-8">
+                <h2 className="text-2xl font-semibold text-gray-800">Đăng Ký</h2>
             </div>
-            <div className="regist-form-inputname">
+
+            <div className="mb-6">
                 <input
                     type="text"
                     placeholder="tên đăng nhập"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
+                    className={`w-full p-3 rounded-lg border ${error.fullName ? 'border-red-500 shadow-sm' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-red-300`}
                 />
-                {error.fullName && <div className="error">{error.fullName}</div>}
+                {error.fullName && <div className="text-red-500 text-sm mt-1">{error.fullName}</div>}
             </div>
-            <div className="regist-form-email">
+
+            <div className="mb-6">
                 <input
                     type="text"
                     placeholder="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className={`w-full p-3 rounded-lg border ${error.email ? 'border-red-500 shadow-sm' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-red-300`}
                 />
-                {error.email && <div className="error">{error.email}</div>}
+                {error.email && <div className="text-red-500 text-sm mt-1">{error.email}</div>}
             </div>
-            <div className="regist-form-password">
+
+            <div className="mb-6">
                 <input
                     type="password"
                     placeholder="mật khẩu"
                     value={passWord}
                     onChange={(e) => setPassWord(e.target.value)}
+                    className={`w-full p-3 rounded-lg border ${error.passWord ? 'border-red-500 shadow-sm' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-red-300`}
                 />
-                {error.passWord && <div className="error">{error.passWord}</div>}
+                {error.passWord && <div className="text-red-500 text-sm mt-1">{error.passWord}</div>}
             </div>
-            <div className="regist-form-confirm-password">
+
+            <div className="mb-6">
                 <input
                     type="password"
                     placeholder="xác nhận mật khẩu"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassWord(e.target.value)}
+                    className={`w-full p-3 rounded-lg border ${error.confirmPassword ? 'border-red-500 shadow-sm' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-red-300`}
                 />
-                {error.confirmPassword && <div className="error">{error.confirmPassword}</div>}
+                {error.confirmPassword && <div className="text-red-500 text-sm mt-1">{error.confirmPassword}</div>}
             </div>
-            <div className="regist-form-confirm">
-                <button type="submit">xác nhận tạo tài khoản</button>
+
+            <div className="mt-6">
+                <button
+                    type="submit"
+                    className="w-full py-3 bg-gradient-to-r from-[#ff6b6b] to-[#ff5252] text-white rounded-lg font-semibold uppercase tracking-wide hover:from-[#ff5252] hover:to-[#e53e3e] transition-all duration-300"
+                >
+                    xác nhận tạo tài khoản
+                </button>
             </div>
-            <div className="regist-form-loginoption">
-                <p className="loginoption">đã có tài khoản </p><Link to='/login' ><p className="loginoption1">Đăng nhập</p></Link>
+
+            <div className="mt-5 text-center">
+                <p className="text-gray-500 inline">đã có tài khoản </p>
+                <Link to="/login">
+                    <span className="text-[#ff8686] font-semibold hover:text-[#ff2c2c] hover:underline cursor-pointer ml-1">
+                        Đăng nhập
+                    </span>
+                </Link>
             </div>
         </form>
     );
-}
+};
+
 export default RegistForm;

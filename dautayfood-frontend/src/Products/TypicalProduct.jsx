@@ -35,6 +35,22 @@ const TypicalProducts = [
         price: "40.000đ",
         description: "Bánh tiramisu thơm ngon, béo ngậy.",
         type: "banh-trang"
+    },
+    {
+        id: 50,
+        name: "Trà măng cầu",
+        image: mangCau,
+        price: "32.000đ",
+        description: "Trà măng cầu chua nhẹ, thanh mát.",
+        type: "che"
+    },
+    {
+        id: 51,
+        name: "Tiramisu",
+        image: tiramisu,
+        price: "40.000đ",
+        description: "Bánh tiramisu thơm ngon, béo ngậy.",
+        type: "banh-trang"
     }
 ]
 TypicalProducts.forEach(product => {

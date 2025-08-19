@@ -1,5 +1,4 @@
 import { useState } from "react";
-import './LoginForm.css';
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
@@ -27,14 +26,9 @@ const LoginForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (validate()) {//neu hop le
+        if (validate()) {
             alert("Đăng nhập thành công!");
-            console.log({
-                fullName,
-                email,
-                passWord
-            });
-            // Reset form (tùy chọn)
+            console.log({ fullName, email, passWord });
             setFullName("");
             setEmail("");
             setPassWord("");
@@ -43,44 +37,66 @@ const LoginForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="LoginForm">
-            <div className="login-form-title">
-                <h2>Đăng Nhập</h2>
+        <form
+            onSubmit={handleSubmit}
+            className="w-80 max-w-2xl lg:w-full bg-white/20 backdrop-blur-md rounded-xl shadow-2xl p-8 animate-slide-up"
+        >
+            <div className="text-center mb-8">
+                <h2 className="text-2xl font-semibold text-gray-800">Đăng Nhập</h2>
             </div>
-            <div className="login-form-inputname">
+
+            <div className="mb-6">
                 <input
                     type="text"
                     placeholder="tên đăng nhập"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
+                    className={`w-full p-3 rounded-lg border ${error.fullName ? 'border-red-500 shadow-sm' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-red-300`}
                 />
-                {error.fullName && <div className="error">{error.fullName}</div>}
+                {error.fullName && <div className="text-red-500 text-sm mt-1">{error.fullName}</div>}
             </div>
-            <div className="login-form-email">
+
+            <div className="mb-6">
                 <input
                     type="text"
                     placeholder="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className={`w-full p-3 rounded-lg border ${error.email ? 'border-red-500 shadow-sm' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-red-300`}
                 />
-                {error.email && <div className="error">{error.email}</div>}
+                {error.email && <div className="text-red-500 text-sm mt-1">{error.email}</div>}
             </div>
-            <div className="login-form-password">
+
+            <div className="mb-6">
                 <input
                     type="password"
                     placeholder="mật khẩu"
                     value={passWord}
                     onChange={(e) => setPassWord(e.target.value)}
+                    className={`w-full p-3 rounded-lg border ${error.passWord ? 'border-red-500 shadow-sm' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-red-300`}
                 />
-                {error.passWord && <div className="error">{error.passWord}</div>}
+                {error.passWord && <div className="text-red-500 text-sm mt-1">{error.passWord}</div>}
             </div>
-            <div className="login-form-confirm">
-                <button type="submit">đăng nhập</button>
+
+            <div className="mt-6">
+                <button
+                    type="submit"
+                    className="w-full py-3 bg-gradient-to-r from-[#ff6b6b] to-[#ff5252] text-white rounded-lg font-semibold uppercase tracking-wide hover:from-[#ff5252] hover:to-[#e53e3e] transition-all duration-300"
+                >
+                    đăng nhập
+                </button>
             </div>
-            <div className="regist-form-registoption">
-                <p className="registnoption">chưa có tài khoản </p><Link to='/regist' ><p className="registoption1">Đăng ký</p></Link>
+
+            <div className="mt-5 text-center">
+                <p className="text-gray-500 inline">chưa có tài khoản </p>
+                <Link to="/regist">
+                    <span className="text-[#ff8686] font-semibold hover:text-[#ff2c2c] hover:underline cursor-pointer ml-1">
+                        Đăng ký
+                    </span>
+                </Link>
             </div>
         </form>
     );
 };
+
 export default LoginForm;
