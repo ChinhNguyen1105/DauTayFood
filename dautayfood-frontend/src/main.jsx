@@ -4,11 +4,17 @@ import './index.css';
 
 import App from './App';  // ✅ Gọi App tổng (nơi chứa Header + Route)
 import { BrowserRouter } from 'react-router-dom';
+import { CartProvider } from "./context/CartContext";
+import ThemeProvider from './context/ThemeProvider';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <StrictMode>
-      <App />
+      <CartProvider>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </CartProvider>
     </StrictMode>
   </BrowserRouter>
 );

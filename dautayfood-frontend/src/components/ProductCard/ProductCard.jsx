@@ -2,11 +2,12 @@ import React from 'react';
 import ProductDetail from '../ProductDetail/ProductDetail';
 import PropTypes from 'prop-types';
 import OverlayPortal from '../OverlayPortal/OverlayPortal';
+import useCart from '../../hooks/useCart';
+import { toast } from 'react-hot-toast';
 
 const ProductCard = ({
     product,
     selectedProduct,
-    handleAddToCart,
     handleOpen,
     handleClose
 }) => {
@@ -14,13 +15,20 @@ const ProductCard = ({
 
     const isOverlayVisible = selectedProduct?.id === product.id;
 
+    const { addToCart } = useCart();
+
+    const handleAddToCart = (e) => {
+        e.stopPropagation();
+        addToCart(product, 1);
+    };
+
     return (
         <>
             {/* Card hiển thị sản phẩm */}
             <div
                 className="w-[170px] sm:w-[180px] rounded-md overflow-hidden bg-[#D4ECE0] shadow border hover:shadow-lg cursor-pointer transition"
                 onClick={(e) => {
-                    e.stopPropagation();           // optional: ngăn bubbling nếu cần
+                    e.stopPropagation();
                     console.log('open product', product.id);
                     handleOpen(product);
                 }}
@@ -52,12 +60,12 @@ const ProductCard = ({
             {isOverlayVisible && (
                 <OverlayPortal onClickOutside={handleClose}>
                     <div
-                        onClick={(e) => e.stopPropagation()} // tránh click trong modal đóng lại
+                        onClick={(e) => e.stopPropagation()}
                     >
                         <ProductDetail
                             product={product}
                             onClose={handleClose}
-                            handleAddToCart={handleAddToCart}
+                            handleAddToCart={handleAddToCart} // 👈 gọi trực tiếp từ hook
                         />
                     </div>
                 </OverlayPortal>
@@ -76,7 +84,6 @@ ProductCard.propTypes = {
         description: PropTypes.string
     }),
     selectedProduct: PropTypes.object,
-    handleAddToCart: PropTypes.func.isRequired,
     handleOpen: PropTypes.func.isRequired,
     handleClose: PropTypes.func.isRequired
 };

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import {
     FaShoppingCart,
     FaBars,
@@ -7,14 +7,17 @@ import {
     FaCog,
     FaTimes
 } from 'react-icons/fa'
-import { Link } from "react-router-dom"
 import logo from '../../assets/logo.png'
+import useCart from "../../hooks/useCart"   // 👈 import hook
 
 const Sidebar = () => {
     const [open, setOpen] = useState(false)
     const sidebarRef = useRef(null)
     const toggleRef = useRef(null)
     const navigate = useNavigate()
+
+    const { cartItems } = useCart()
+    const cartCount = cartItems.length
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -42,7 +45,7 @@ const Sidebar = () => {
         navigate(path)
         setOpen(false)
     }
-    console.log(menuItems);
+
     return (
         <>
             {open && (
@@ -63,7 +66,7 @@ const Sidebar = () => {
             >
                 <div className="flex justify-center items-center py-2 px-6 border-b border-white/20 bg-white/10 backdrop-blur-md">
                     <Link to='/' className='flex items-center justify-center'>
-                        <img src={logo} alt="Logo" className="h-[50px] w-auto brightness-0 saturate-100 block ml-10"></img>
+                        <img src={logo} alt="Logo" className="h-[50px] w-auto brightness-0 saturate-100 block ml-10" />
                     </Link>
                 </div>
 
@@ -73,18 +76,25 @@ const Sidebar = () => {
                             <li key={index}>
                                 <button
                                     onClick={() => handleMenuClick(item.path)}
-                                    className="flex items-center w-full text-black/75 px-5 py-3 rounded-md transition hover:bg-white/10 border-l-4 border-transparent hover:border-white gap-3"
+                                    className="flex items-center w-full text-black/75 px-5 py-3 rounded-md transition hover:bg-white/10 border-l-4 border-transparent hover:border-white gap-3 relative"
                                 >
                                     <item.icon className="text-lg" />
+
+                                    {/* 👉 Badge hiển thị số lượng giỏ hàng */}
+                                    {item.text === "Giỏ hàng" && cartCount > 0 && (
+                                        <span className="absolute left-9 top-2 bg-red-600 text-white text-xs font-bold rounded-full px-2 py-0.5">
+                                            {cartCount}
+                                        </span>
+                                    )}
+
                                     <span className="font-medium">{item.text}</span>
                                 </button>
                             </li>
-
                         ))}
                     </ul>
                 </nav>
 
-                <div className="py-4 px-6 border-t border-white/20 text-center text-sm text-white/70 bg-white/5 bg-[#FFAFAF]">
+                <div className="py-4 px-6 border-t border-white/20 text-center text-sm text-white/70 bg-white/5 ">
                     © 2025 Your App
                 </div>
             </div>

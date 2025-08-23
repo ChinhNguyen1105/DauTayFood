@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom";
 import ButtonCart from "../ButtonCart/ButtonCart";
 import ButtonTry from "../ButtonTry/ButtonTry";
 import ButtonClose from "../ButtonClose/ButtonClose";
+import useCart from "../../hooks/useCart";
+import { toast } from "react-hot-toast";
 
-const ProductDetail = ({ product, onClose, handleAddToCart }) => {
+const ProductDetail = ({ product, onClose }) => {
     const [quantity, setQuantity] = useState(1);
     const [note, setNote] = useState("");
     const navigate = useNavigate();
+    const { addToCart } = useCart();
 
     const handleCheckout = () => {
         navigate('/checkout', {
@@ -18,6 +21,12 @@ const ProductDetail = ({ product, onClose, handleAddToCart }) => {
                 address: '123 Trần Hưng Đạo, Hà Nội'
             }
         });
+        onClose();
+    };
+
+    const handleAddToCart = () => {
+        addToCart(product, quantity);
+        toast.success("Đã thêm vào giỏ hàng!");
         onClose();
     };
 
@@ -71,15 +80,12 @@ const ProductDetail = ({ product, onClose, handleAddToCart }) => {
                 </div>
 
                 <div className="flex gap-4 justify-end">
-                    <ButtonCart
-                        onClick={() => {
-                            handleAddToCart(product, quantity, note);
-                            alert("Đã thêm vào giỏ hàng!");
-                            onClose();
-                        }}
-                        children="Thêm vào giỏ"
-                    ></ButtonCart>
-                    <ButtonTry onClick={handleCheckout} children={'Thanh toán'}></ButtonTry>
+                    <ButtonCart onClick={handleAddToCart}>
+                        Thêm vào giỏ
+                    </ButtonCart>
+                    <ButtonTry onClick={handleCheckout}>
+                        Thanh toán
+                    </ButtonTry>
                 </div>
             </div>
         </div>

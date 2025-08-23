@@ -42,15 +42,17 @@ function MenuPage({
     };
 
     return (
-        <div>
+        <div className="bg-white dark:bg-gray-900 min-h-screen transition-colors duration-500">
+            {/* Banner */}
             <img
                 className="w-screen h-screen object-cover mt-5"
                 src={Banner}
                 alt="banner"
             />
 
-            <div className="relative bg-[#dbffcb] p-3 text-center -mt-12 z-10">
-                <h2 className="text-[1.4rem] font-semibold text-[#222] tracking-wider">
+            {/* Top món ngon */}
+            <div className="relative bg-[#dbffcb] dark:bg-gray-800 p-3 text-center -mt-12 z-10 transition-colors">
+                <h2 className="text-[1.4rem] font-semibold text-[#222] dark:text-gray-100 tracking-wider">
                     top món ngon hàng tuần
                 </h2>
             </div>
@@ -62,15 +64,19 @@ function MenuPage({
                 handleClose={handleClose}
             />
 
-            <div className="relative bg-[#dbffcb] p-3 text-center -mt-12 z-10">
-                <h2 className="text-[1.4rem] font-semibold text-[#222] tracking-wider">
+            {/* Big Menu */}
+            <div className="relative bg-[#dbffcb] dark:bg-gray-800 p-3 text-center -mt-12 z-10 transition-colors">
+                <h2 className="text-[1.4rem] font-semibold text-[#222] dark:text-gray-100 tracking-wider">
                     Big Menu
                 </h2>
             </div>
 
+            {/* Search + List Menu */}
             <div
                 id="search-linking"
-                className="bg-gradient-to-b from-[#ff8080] to-[#d4ece0] z-[100] mx-auto max-w-[100%]"
+                className="bg-gradient-to-b from-[#ff8080] to-[#d4ece0] 
+                           dark:from-gray-700 dark:to-gray-900 
+                           z-[100] mx-auto max-w-[100%] transition-colors"
             >
                 <FilterTabs activeTab={selectedType} onTabChange={handleTabChange} />
                 <ListMenu
