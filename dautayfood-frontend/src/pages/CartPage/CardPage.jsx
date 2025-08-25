@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logoBlack from "../../assets/logo_black.png";
 import logoWhite from "../../assets/logo_white.png";
-import OverlayNote from "../../components/OverlayNote/OverlayNote";
+import OverlayNote from "../../components/common/OverlayNote/OverlayNote";
 import ScrollToTop from "../../ScrollToTop";
 import useCart from "../../hooks/useCart";
 

@@ -1,14 +1,17 @@
 import { useEffect, useRef } from "react";
-import ProductCard from "../../components/ProductCard/ProductCard.jsx";
-import BigProductCard from "../../components/BigProductCard/BigProductCard.jsx";
-import HeroSection from "../../components/HeroBanner/HeroBanner.jsx";
+import ProductCard from "../../components/common/ProductCard/ProductCard.jsx";
+import BigProductCard from "../../components/common/BigProductCard/BigProductCard.jsx";
+import HeroSection from "../../components/layout/HeroBanner/HeroBanner.jsx";
 import TypicalProducts from "../../Products/TypicalProduct.jsx";
 import ProductForBigCard from "../../Products/ProductForBigCard.jsx";
 import ScrollToTop from "../../ScrollToTop";
-import WhyChoose from "../../components/WhyChoose/WhyChoose.jsx";
-import Feedback from "../../components/Feedback/Feedback.jsx";
+import WhyChoose from "../../components/sections/WhyChoose/WhyChoose.jsx";
+import Feedback from "../../components/sections/Feedback/Feedback.jsx";
+import useSelectedProduct from "../../hooks/useSelectedProduct.jsx";
+import ImpressiveStats from "../../components/sections/ImpressiveStats/ImpressiveStats.jsx";
 
-function Home({ selectedProduct, handleOpen, handleClose, handleAddToCart }) {
+function Home() {
+  const { selectedProduct, handleOpen, handleClose } = useSelectedProduct();
   const whyChooseRef = useRef(null);
   const feedbackRef = useRef(null);
 
@@ -81,7 +84,6 @@ function Home({ selectedProduct, handleOpen, handleClose, handleAddToCart }) {
                 key={product.id}
                 product={product}
                 selectedProduct={selectedProduct}
-                handleAddToCart={handleAddToCart}
                 handleOpen={handleOpen}
                 handleClose={handleClose}
               />
@@ -104,7 +106,6 @@ function Home({ selectedProduct, handleOpen, handleClose, handleAddToCart }) {
                 key={product.id}
                 product={product}
                 selectedProduct={selectedProduct}
-                handleAddToCart={handleAddToCart}
                 handleOpen={() => handleOpen(product)}
                 handleClose={handleClose}
                 className="fade-in-card"
@@ -117,6 +118,8 @@ function Home({ selectedProduct, handleOpen, handleClose, handleAddToCart }) {
         <div ref={feedbackRef}>
           <Feedback />
         </div>
+
+        <ImpressiveStats />
       </main>
     </div>
   );

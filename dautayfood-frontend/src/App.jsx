@@ -1,13 +1,10 @@
-import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { CartProvider } from "./context/CartContext";
 import { Toaster } from "react-hot-toast";
-import useTheme from "./hooks/useTheme";
-
-// Components
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import SideBar from "./components/DropDownMenu/DropDownMenu";
+import products from "./Products/Product";
+// Layout
+import Header from "./components/layout/Header/Header";
+import Footer from "./components/layout/Footer/Footer";
+import SideBar from "./components/ui/SideBar/SideBar";
 
 // Pages
 import Home from "./pages/Home/Home";
@@ -20,128 +17,45 @@ import CartPage from "./pages/CartPage/CardPage";
 import CheckOut from "./pages/CheckOut/CheckOut";
 import PayVietQRPage from "./pages/BankingQR/BankingQR";
 import SettingsPage from "./pages/SettingPage/SettingPage";
-
-// Products
-import Products from "./Products/Product";
+import TermsPage from "./pages/TermsPage/TermsPage";
 
 function App() {
-    const { theme, toggleTheme } = useTheme();
-
-    // Language
-    const [language, setLanguage] = useState("vi");
-
-    // Selected product for detail modal
-    const [selectedProduct, setSelectedProduct] = useState(null);
-    const handleOpen = (product) => setSelectedProduct(product);
-    const handleClose = () => setSelectedProduct(null);
-
-    // User info
-    const initialData = {
-        userID: "123456789",
-        loginName: "ChinhNguyen1152k5",
-        email: "Chinhnguyen115@gmail.com",
-        phone: "123456789",
-        gender: "Nam",
-        day: "11",
-        month: "05",
-        year: "2005",
-    };
-    const [profileData, setProfileData] = useState(initialData);
-    const [avatarImage, setAvatarImage] = useState(null);
-    const getInitialAvatar = () => profileData.loginName.charAt(0).toUpperCase();
-
-    // Search term
-    const [searchTerm, setSearchTerm] = useState("");
-    const handleSearch = (term) => setSearchTerm(term);
-
     return (
         <>
-            <CartProvider>
-                {/* Toaster */}
-                <Toaster
-                    position="top-right"
-                    toastOptions={{
-                        duration: 2000,
-                        style: { background: "#363636", color: "#fff" },
-                        success: { style: { background: "#00b09b" } },
-                    }}
-                />
+            {/* Toaster */}
+            <Toaster
+                position="top-right"
+                toastOptions={{
+                    duration: 2000,
+                    style: { background: "#363636", color: "#fff" },
+                    success: { style: { background: "#00b09b" } },
+                }}
+            />
 
-                {/* SideBar & Header */}
-                <SideBar />
-                <Header
-                    onSearch={handleSearch}
-                    avatarImage={avatarImage}
-                    getInitialAvatar={getInitialAvatar}
-                />
+            {/* SideBar & Header */}
+            <SideBar />
+            <Header />
 
-                {/* Routes */}
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <Home
-                                selectedProduct={selectedProduct}
-                                handleOpen={handleOpen}
-                                handleClose={handleClose}
-                            />
-                        }
-                    />
-                    <Route path="/regist" element={<RegistPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route
-                        path="/menu"
-                        element={
-                            <MenuPage
-                                Products={Products}
-                                searchTerm={searchTerm}
-                                onSearch={handleSearch}
-                                selectedProduct={selectedProduct}
-                                handleOpen={handleOpen}
-                                handleClose={handleClose}
-                            />
-                        }
-                    />
-                    <Route
-                        path="/profile"
-                        element={
-                            <ProfilePage
-                                avatarImage={avatarImage}
-                                setAvatarImage={setAvatarImage}
-                                getInitialAvatar={getInitialAvatar}
-                                profileData={profileData}
-                                setProfileData={setProfileData}
-                                initialData={initialData}
-                            />
-                        }
-                    />
-                    <Route path="/about-us" element={<AboutUsPage />} />
-                    <Route path="/cart" element={<CartPage />} />
-                    <Route path="/checkout" element={
-                        <CheckOut
-                            Products={Products}
-                            selectedProduct={selectedProduct}
-                            handleOpen={handleOpen}
-                            handleClose={handleClose} />} />
-                    <Route path="/pay-vietqr" element={<PayVietQRPage />} />
-                    <Route
-                        path="/settings"
-                        element={
-                            <SettingsPage
-                                profileData={profileData}
-                                setProfileData={setProfileData}
-                                language={language}
-                                setLanguage={setLanguage}
-                            />
-                        }
-                    />
-                </Routes>
+            {/* Routes */}
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/regist" element={<RegistPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/menu" element={<MenuPage Products={products} />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/about-us" element={<AboutUsPage />} />
+                <Route path="/cart" element={<CartPage />} />
+                <Route path="/checkout" element={<CheckOut Products={products} />} />
+                <Route path="/pay-vietqr" element={<PayVietQRPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/terms" element={<TermsPage />} />
+            </Routes>
 
-                {/* Footer */}
-                <Footer />
-            </CartProvider>
+            {/* Footer */}
+            <Footer />
         </>
     );
 }
 
 export default App;
+// localStorage.clear();

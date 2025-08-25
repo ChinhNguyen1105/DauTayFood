@@ -1,5 +1,6 @@
-import LoginForm from "../../components/LoginForm/LoginForm";
-import ScrollToTop from '../../ScrollToTop';
+// LoginPage.jsx
+import { FaGoogle, FaFacebookF } from "react-icons/fa";
+import ScrollToTop from "../../ScrollToTop";
 
 const LoginPage = () => {
     return (
@@ -18,13 +19,67 @@ const LoginPage = () => {
                 </div>
 
                 {/* Form */}
-                <div className="relative z-10 w-full max-w-md flex justify-center">
-                    <LoginForm />
+                <div className="relative z-10 w-full max-w-md bg-white/20 backdrop-blur-md shadow-xl rounded-2xl p-8">
+                    <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+                        Đăng nhập
+                    </h2>
+
+                    {/* Form đăng nhập */}
+                    <form className="flex flex-col gap-4 ">
+                        <input
+                            type="text"
+                            placeholder="Email hoặc số điện thoại"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-400"
+                        />
+                        <input
+                            type="password"
+                            placeholder="Mật khẩu"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-400"
+                        />
+
+                        <button
+                            type="submit"
+                            className="w-full py-3 bg-red-500 text-white rounded-xl font-semibold hover:bg-red-600 transition"
+                        >
+                            Đăng nhập
+                        </button>
+                    </form>
+
+                    {/* Quên mật khẩu */}
+                    <div className="text-right mt-3 text-sm">
+                        <a href="/forgot-password" className="text-red-500 hover:underline">
+                            Quên mật khẩu?
+                        </a>
+                    </div>
+
+                    {/* Hoặc */}
+                    <div className="flex items-center gap-2 my-6">
+                        <div className="flex-1 border-t border-gray-300"></div>
+                        <span className="text-gray-500 text-sm">Hoặc</span>
+                        <div className="flex-1 border-t border-gray-300"></div>
+                    </div>
+
+                    {/* Đăng nhập nhanh */}
+                    <div className="flex items-center justify-center gap-4">
+                        <button className="flex items-center gap-2 px-4 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition flex-1 justify-center">
+                            <FaGoogle className="text-red-500" />
+                            Google
+                        </button>
+                        <button className="flex items-center gap-2 px-4 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 transition flex-1 justify-center">
+                            <FaFacebookF className="text-blue-600" />
+                            Facebook
+                        </button>
+                    </div>
+
+                    {/* Chưa có tài khoản */}
+                    <div className="text-center mt-6 text-sm text-gray-600">
+                        Chưa có tài khoản?{" "}
+                        <a href="/regist" className="text-red-500 hover:underline font-medium">
+                            Đăng ký ngay
+                        </a>
+                    </div>
                 </div>
             </main>
-
-            {/* Footer */}
-
         </div>
     );
 };

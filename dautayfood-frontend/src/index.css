@@ -12,3 +12,13 @@ html.dark,
 body.dark {
     @apply bg-gray-950 text-gray-100;
 }
+
+/* Overlay text color rule */
+.overlay-content {
+    @apply text-gray-900;
+}
+
+/* Force black text in overlays even in dark mode */
+.dark .overlay-content {
+    @apply text-gray-900;
+}

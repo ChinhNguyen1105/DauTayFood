@@ -45,7 +45,7 @@ const AboutUsPage = () => {
             <section
                 id="hero"
                 data-animate
-                className={`relative h-screen flex items-center justify-center text-center px-8 clip-path-custom mt-7
+                className={`relative h-screen flex items-center justify-center text-center px-8 clip-path-custom mt-0
                     ${isVisible("hero")
                         ? "opacity-100 translate-y-0 transition-all duration-700"
                         : "opacity-0 translate-y-12 transition-all duration-700"
@@ -210,6 +210,7 @@ const AboutUsPage = () => {
                 </div>
             </section>
         </div>
+
     );
 };
 

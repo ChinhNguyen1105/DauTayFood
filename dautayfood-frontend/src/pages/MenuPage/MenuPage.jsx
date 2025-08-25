@@ -1,43 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import Banner from '../../assets/banner.png';
-import FilterTabs from '../../components/FilterTabs/FilterTabs';
-import TrendProduct from '../../components/TrendProduct/TrendProduct';
-import ListMenu from '../../components/ListMenu/ListMenu';
-import PropTypes from 'prop-types';
+// src/pages/MenuPage/MenuPage.jsx
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import Banner from "../../assets/banner.png";
+import FilterTabs from "../../components/ui/FilterTabs/FilterTabs";
+import TrendProduct from "../../components/sections/TrendProduct/TrendProduct";
+import ListMenu from "../../components/layout/ListMenu/ListMenu";
 
-function MenuPage({
-    Products,
-    searchTerm,
-    onSearch,
-    handleAddToCart,
-    selectedProduct,
-    handleOpen,
-    handleClose
-}) {
-    const [selectedType, setSelectedType] = useState('tat-ca');
+// hooks
+import useSelectedProduct from "../../hooks/useSelectedProduct";
+import { useSearch } from "../../hooks/useSearch";
+
+function MenuPage({ Products }) {
+    const [selectedType, setSelectedType] = useState("tat-ca");
     const location = useLocation();
 
+    // lấy search từ context
+    const { searchTerm, onSearch } = useSearch();
+
+    // lấy state selectedProduct từ custom hook
+    const { selectedProduct, handleOpen, handleClose } = useSelectedProduct();
+
+    // khi search thì auto chuyển về tab "tất cả"
     useEffect(() => {
         if (searchTerm) {
-            setSelectedType('tat-ca');
+            setSelectedType("tat-ca");
         }
     }, [searchTerm]);
 
+    // scroll đến section nếu có hash (#id) trên URL
     useEffect(() => {
         if (location.hash) {
-            const id = location.hash.replace('#', '');
+            const id = location.hash.replace("#", "");
             const target = document.getElementById(id);
             if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
+                target.scrollIntoView({ behavior: "smooth" });
             }
         }
     }, [location]);
 
+    // xử lý đổi tab
     const handleTabChange = (tabId) => {
         setSelectedType(tabId);
-        if (tabId === 'tat-ca' && onSearch) {
-            onSearch('');
+        if (tabId === "tat-ca" && onSearch) {
+            onSearch(""); // clear search khi chọn lại "tất cả"
         }
     };
 
@@ -45,7 +50,7 @@ function MenuPage({
         <div className="bg-white dark:bg-gray-900 min-h-screen transition-colors duration-500">
             {/* Banner */}
             <img
-                className="w-screen h-screen object-cover mt-5"
+                className="w-screen h-screen object-cover"
                 src={Banner}
                 alt="banner"
             />
@@ -59,7 +64,6 @@ function MenuPage({
 
             <TrendProduct
                 selectedProduct={selectedProduct}
-                handleAddToCart={handleAddToCart}
                 handleOpen={handleOpen}
                 handleClose={handleClose}
             />
@@ -78,13 +82,15 @@ function MenuPage({
                            dark:from-gray-700 dark:to-gray-900 
                            z-[100] mx-auto max-w-[100%] transition-colors"
             >
+                {/* Tabs */}
                 <FilterTabs activeTab={selectedType} onTabChange={handleTabChange} />
+
+                {/* List Menu */}
                 <ListMenu
                     Products={Products}
                     selectedType={selectedType}
-                    searchTerm={searchTerm}
+                    searchTerm={searchTerm} // truyền searchTerm để ListMenu lọc toàn bộ sản phẩm có chứa chữ đó
                     selectedProduct={selectedProduct}
-                    handleAddToCart={handleAddToCart}
                     handleOpen={handleOpen}
                     handleClose={handleClose}
                 />
@@ -92,15 +98,5 @@ function MenuPage({
         </div>
     );
 }
-
-MenuPage.propTypes = {
-    Products: PropTypes.array.isRequired,
-    searchTerm: PropTypes.string.isRequired,
-    onSearch: PropTypes.func.isRequired,
-    handleAddToCart: PropTypes.func.isRequired,
-    selectedProduct: PropTypes.object,
-    handleOpen: PropTypes.func.isRequired,
-    handleClose: PropTypes.func.isRequired
-};
 
 export default MenuPage;

@@ -21,7 +21,7 @@ const PayByVietQRPage = () => {
 
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
-    const [countdown, setCountdown] = useState(3); // Thêm state đếm ngược
+    const [countdown, setCountdown] = useState(3);
 
     useEffect(() => {
         const randomCode = Math.random().toString(36).substring(2, 8).toUpperCase();
@@ -48,7 +48,7 @@ const PayByVietQRPage = () => {
         setOtpSent(true);
         setEnteredOtp('');
         setOtpVerified(false);
-        alert(`OTP của bạn là: ${otp}`); // Demo
+        alert(`OTP của bạn là: ${otp}`);
     };
 
     useEffect(() => {
@@ -63,7 +63,7 @@ const PayByVietQRPage = () => {
                 }, 1000);
 
                 const redirectTimer = setTimeout(() => {
-                    clearInterval(timer); // Xóa bộ đếm
+                    clearInterval(timer);
                     const oldOrders = JSON.parse(localStorage.getItem('orderList')) || [];
                     const newOrders = selectedItems.map(item => ({
                         ...item,
@@ -86,12 +86,14 @@ const PayByVietQRPage = () => {
     }, [enteredOtp, generatedOtp, otpSent, navigate, selectedItems]);
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col py-8 px-4 justify-center items-center my-24">
-            <div className="bg-white w-full max-w-4xl rounded-2xl shadow-xl p-6 md:p-8">
-                <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Thanh toán qua VietQR</h2>
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col py-8 px-4 justify-center items-center mt-24">
+            <div className="bg-white dark:bg-gray-800 w-full max-w-4xl rounded-2xl shadow-xl p-6 md:p-8">
+                <h2 className="text-2xl font-bold mb-6 text-center text-gray-800 dark:text-gray-100">
+                    Thanh toán qua VietQR
+                </h2>
 
                 {/* Thông tin người nhận */}
-                <div className="mb-6 border-b pb-4">
+                <div className="mb-6 border-b border-gray-200 dark:border-gray-700 pb-4 text-gray-700 dark:text-gray-300">
                     <p><strong>Người nhận:</strong> {customerName} ({phone})</p>
                     <p><strong>Địa chỉ:</strong> {address}</p>
                     <p><strong>Số sản phẩm:</strong> {totalItems}</p>
@@ -100,14 +102,14 @@ const PayByVietQRPage = () => {
 
                 <div className="flex flex-col md:flex-row gap-6">
                     {/* Nhập thông tin ngân hàng */}
-                    <div className="flex-1 bg-gray-50 p-4 rounded-xl shadow-inner">
+                    <div className="flex-1 bg-gray-50 dark:bg-gray-700 p-4 rounded-xl shadow-inner">
                         <div className="mb-4">
-                            <label htmlFor="bank" className="block mb-2 font-medium text-gray-700">Ngân hàng:</label>
+                            <label htmlFor="bank" className="block mb-2 font-medium text-gray-700 dark:text-gray-300">Ngân hàng:</label>
                             <select
                                 id="bank"
                                 value={bank}
                                 onChange={(e) => setBank(e.target.value)}
-                                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"
                             >
                                 <option value="">-- Chọn ngân hàng --</option>
                                 <option value="VCB">Vietcombank</option>
@@ -123,30 +125,29 @@ const PayByVietQRPage = () => {
                         </div>
 
                         <div className="mb-4">
-                            <label htmlFor="accountNumber" className="block mb-2 font-medium text-gray-700">Số tài khoản:</label>
+                            <label htmlFor="accountNumber" className="block mb-2 font-medium text-gray-700 dark:text-gray-300">Số tài khoản:</label>
                             <input
                                 type="text"
                                 id="accountNumber"
                                 value={accountNumber}
                                 onChange={(e) => setAccountNumber(e.target.value)}
                                 placeholder="Ví dụ: 0123456789"
-                                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"
                             />
                         </div>
 
                         <div className="mb-4">
-                            <label htmlFor="accountName" className="block mb-2 font-medium text-gray-700">Chủ tài khoản:</label>
+                            <label htmlFor="accountName" className="block mb-2 font-medium text-gray-700 dark:text-gray-300">Chủ tài khoản:</label>
                             <input
                                 type="text"
                                 id="accountName"
                                 value={accountName}
                                 onChange={(e) => setAccountName(e.target.value)}
                                 placeholder="Tên chủ tài khoản"
-                                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                                className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 focus:outline-none dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"
                             />
                         </div>
 
-                        {/* OTP */}
                         {!otpVerified ? (
                             <div className="mt-4">
                                 {!otpSent ? (
@@ -164,7 +165,7 @@ const PayByVietQRPage = () => {
                                             onChange={(e) => setEnteredOtp(e.target.value)}
                                             placeholder="Nhập OTP gồm 6 số"
                                             maxLength={6}
-                                            className="w-full border rounded-lg px-3 py-2 mb-2"
+                                            className="w-full border rounded-lg px-3 py-2 mb-2 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"
                                         />
                                         <button
                                             onClick={handleSendOtp}
@@ -181,26 +182,25 @@ const PayByVietQRPage = () => {
                     </div>
 
                     {/* QR Code */}
-                    <div className="flex-1 flex flex-col items-center justify-center border border-gray-200 rounded-xl p-4 bg-gray-50">
-                        <h5 className="text-gray-700 font-bold text-base mb-3 text-center">Hoặc quét mã VietQR để thanh toán</h5>
+                    <div className="flex-1 flex flex-col items-center justify-center border border-gray-200 dark:border-gray-600 rounded-xl p-4 bg-gray-50 dark:bg-gray-700">
+                        <h5 className="text-gray-700 dark:text-gray-300 font-bold text-base mb-3 text-center">Hoặc quét mã VietQR để thanh toán</h5>
                         {qrUrl ? (
                             <>
                                 <img src={qrUrl} alt="VietQR" className="w-48 h-48 mb-3 border-blue-800 border-2 p-0.5" />
-                                <p className="text-sm text-gray-600 text-center">
+                                <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
                                     Số tiền: <span className="font-semibold text-red-600">{amount.toLocaleString()}đ</span>
                                 </p>
-                                <p className="text-sm text-gray-600 text-center">
+                                <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
                                     Nội dung: <span className="font-semibold">{`Thanh toán cho mã đơn hàng ${orderCode}`}</span>
                                 </p>
-                                <p className="text-xs text-gray-500 mt-1 text-center">* Vui lòng kiểm tra thông tin trước khi thanh toán</p>
+                                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-center">* Vui lòng kiểm tra thông tin trước khi thanh toán</p>
                             </>
                         ) : (
-                            <p className="text-gray-500 text-sm text-center">Vui lòng nhập ngân hàng & số tài khoản để tạo QR</p>
+                            <p className="text-gray-500 dark:text-gray-400 text-sm text-center">Vui lòng nhập ngân hàng & số tài khoản để tạo QR</p>
                         )}
                     </div>
                 </div>
 
-                {/* Toast */}
                 {showToast && (
                     <div className="fixed bottom-4 right-4 px-4 py-2 rounded-lg shadow-lg text-white bg-green-500 z-50">
                         {toastMessage} <span className="font-bold">{countdown}s</span>
