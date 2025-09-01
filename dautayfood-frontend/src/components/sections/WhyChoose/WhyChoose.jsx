@@ -29,7 +29,7 @@ export default function WhyChooseUs() {
     return (
         <section
             ref={whyChooseRef}
-            className={`section-fade relative px-4 md:px-8 overflow-hidden
+            className={`section-fade relative px-10 md:px-8 overflow-hidden mb-10
         ${darkMode
                     ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
                     : "bg-gradient-to-br from-white via-red-50/30 to-pink-50/40"}`}
@@ -37,7 +37,7 @@ export default function WhyChooseUs() {
             <div className="relative z-10 max-w-7xl mx-auto text-center mb-16">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold 
                        bg-gradient-to-r from-red-600 via-red-500 to-pink-500 
-                       bg-clip-text text-transparent mb-4">
+                       bg-clip-text text-transparent mb-4 mt-6">
                     Vì sao chọn Dâu Tây Food?
                 </h2>
                 <div className="w-24 h-1 bg-gradient-to-r from-red-400 to-pink-400 mx-auto rounded-full"></div>
@@ -46,7 +46,7 @@ export default function WhyChooseUs() {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 mx-20">
                 {reasons.map((item, idx) => (
                     <div key={item.title} className={`fade-in-card stagger-${idx + 1} group`}>
                         <div className="gradient-border floating-animation" style={{ animationDelay: `${idx * 2}s` }}>

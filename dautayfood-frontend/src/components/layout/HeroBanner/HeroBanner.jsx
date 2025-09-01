@@ -28,7 +28,7 @@ const HeroSection = ({
     const handlePromoClick = () => navigate("/menu#search-linking");
 
     return (
-        <section className="relative w-screen h-screen overflow-hidden">
+        <section className="relative w-auto h-screen overflow-hidden">
             {/* Slider container */}
             <div
                 ref={slidesRef}

@@ -1,5 +1,5 @@
 // src/pages/MenuPage/MenuPage.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import Banner from "../../assets/banner.png";
 import FilterTabs from "../../components/ui/FilterTabs/FilterTabs";
@@ -9,8 +9,9 @@ import ListMenu from "../../components/layout/ListMenu/ListMenu";
 // hooks
 import useSelectedProduct from "../../hooks/useSelectedProduct";
 import { useSearch } from "../../hooks/useSearch";
+import useProducts from "../../hooks/useProducts";
 
-function MenuPage({ Products }) {
+function MenuPage() {
     const [selectedType, setSelectedType] = useState("tat-ca");
     const location = useLocation();
 
@@ -19,6 +20,9 @@ function MenuPage({ Products }) {
 
     // lấy state selectedProduct từ custom hook
     const { selectedProduct, handleOpen, handleClose } = useSelectedProduct();
+
+    // lấy products từ context
+    const { products, bestSellingProducts } = useProducts();
 
     // khi search thì auto chuyển về tab "tất cả"
     useEffect(() => {
@@ -62,7 +66,9 @@ function MenuPage({ Products }) {
                 </h2>
             </div>
 
+            {/* TrendProduct dùng bestSellingProducts */}
             <TrendProduct
+                products={bestSellingProducts}
                 selectedProduct={selectedProduct}
                 handleOpen={handleOpen}
                 handleClose={handleClose}
@@ -83,11 +89,11 @@ function MenuPage({ Products }) {
                            z-[100] mx-auto max-w-[100%] transition-colors"
             >
                 {/* Tabs */}
-                <FilterTabs activeTab={selectedType} onTabChange={handleTabChange} />
+                <FilterTabs activeTab={selectedType} onTabChange={handleTabChange} products={products} />
 
                 {/* List Menu */}
                 <ListMenu
-                    Products={Products}
+                    Products={products}
                     selectedType={selectedType}
                     searchTerm={searchTerm} // truyền searchTerm để ListMenu lọc toàn bộ sản phẩm có chứa chữ đó
                     selectedProduct={selectedProduct}

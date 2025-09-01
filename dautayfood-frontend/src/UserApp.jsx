@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import products from "./Products/Product";
+
 // Layout
 import Header from "./components/layout/Header/Header";
 import Footer from "./components/layout/Footer/Footer";
 import SideBar from "./components/ui/SideBar/SideBar";
 
-// Pages
+// Pages (client)
 import Home from "./pages/Home/Home";
 import RegistPage from "./pages/RegistPage/RegistPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -18,6 +18,18 @@ import CheckOut from "./pages/CheckOut/CheckOut";
 import PayVietQRPage from "./pages/BankingQR/BankingQR";
 import SettingsPage from "./pages/SettingPage/SettingPage";
 import TermsPage from "./pages/TermsPage/TermsPage";
+
+// Layout wrapper cho client
+function ClientLayout({ children }) {
+    return (
+        <>
+            <SideBar />
+            <Header />
+            <main className="min-h-[80vh]">{children}</main>
+            <Footer />
+        </>
+    );
+}
 
 function App() {
     return (
@@ -32,30 +44,21 @@ function App() {
                 }}
             />
 
-            {/* SideBar & Header */}
-            <SideBar />
-            <Header />
-
-            {/* Routes */}
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/regist" element={<RegistPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/menu" element={<MenuPage Products={products} />} />
-                <Route path="/profile" element={<ProfilePage />} />
-                <Route path="/about-us" element={<AboutUsPage />} />
-                <Route path="/cart" element={<CartPage />} />
-                <Route path="/checkout" element={<CheckOut Products={products} />} />
-                <Route path="/pay-vietqr" element={<PayVietQRPage />} />
-                <Route path="/settings" element={<SettingsPage />} />
-                <Route path="/terms" element={<TermsPage />} />
+                <Route path="/" element={<ClientLayout><Home /></ClientLayout>} />
+                <Route path="/regist" element={<ClientLayout><RegistPage /></ClientLayout>} />
+                <Route path="/login" element={<ClientLayout><LoginPage /></ClientLayout>} />
+                <Route path="/menu" element={<ClientLayout><MenuPage /></ClientLayout>} />
+                <Route path="/profile" element={<ClientLayout><ProfilePage /></ClientLayout>} />
+                <Route path="/about-us" element={<ClientLayout><AboutUsPage /></ClientLayout>} />
+                <Route path="/cart" element={<ClientLayout><CartPage /></ClientLayout>} />
+                <Route path="/checkout" element={<ClientLayout><CheckOut /></ClientLayout>} />
+                <Route path="/pay-vietqr" element={<ClientLayout><PayVietQRPage /></ClientLayout>} />
+                <Route path="/settings" element={<ClientLayout><SettingsPage /></ClientLayout>} />
+                <Route path="/terms" element={<ClientLayout><TermsPage /></ClientLayout>} />
             </Routes>
-
-            {/* Footer */}
-            <Footer />
         </>
     );
 }
 
 export default App;
-// localStorage.clear();

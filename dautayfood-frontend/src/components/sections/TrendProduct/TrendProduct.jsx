@@ -1,9 +1,8 @@
 import React from "react";
 import sticker from "../../../assets/sticker.png";
 import ProductCard from "../../common/ProductCard/ProductCard";
-import TopProducts from "../../../Products/ProductsWeek";
 
-const TrendProduct = ({ selectedProduct, handleOpen, handleClose }) => {
+const TrendProduct = ({ products = [], selectedProduct, handleOpen, handleClose }) => {
     return (
         <div
             className="
@@ -34,7 +33,7 @@ const TrendProduct = ({ selectedProduct, handleOpen, handleClose }) => {
 
             {/* Top Products */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10">
-                {TopProducts.map((item, index) => (
+                {products.map((item, index) => (
                     <div key={item.id || index} className="relative flex flex-col items-center">
                         {/* Number Circle */}
                         <div

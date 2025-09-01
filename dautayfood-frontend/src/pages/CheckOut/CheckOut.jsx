@@ -11,13 +11,14 @@ import useTheme from "../../hooks/useTheme";
 import useUser from "../../hooks/useAuth";
 import useLanguage from "../../hooks/useLanguage";
 import useSelectedProduct from "../../hooks/useSelectedProduct";
-
+import useProducts from "../../hooks/useProducts";
 const CheckoutSection = ({ Products }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const { profileData } = useUser();
     const { language } = useLanguage();
     const { selectedProduct, handleOpen, handleClose } = useSelectedProduct();
+    const { products } = useProducts();
 
     const [selectedItems, setSelectedItems] = useState([]);
     const [customerName, setCustomerName] = useState("");
@@ -277,7 +278,7 @@ const CheckoutSection = ({ Products }) => {
                         {language === "en" ? "You may also like!" : "Có thể bạn cũng thích!"}
                     </h4>
                     <ListMenu
-                        Products={Products}
+                        Products={products}
                         selectedProduct={selectedProduct}
                         handleOpen={handleOpen}
                         handleClose={handleClose}

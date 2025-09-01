@@ -1,20 +1,14 @@
+// ProductCard.jsx
 import React from 'react';
 import ProductDetail from '../ProductDetail/ProductDetail';
 import PropTypes from 'prop-types';
 import OverlayPortal from '../OverlayPortal/OverlayPortal';
 import useCart from '../../../hooks/useCart';
-import { toast } from 'react-hot-toast';
 
-const ProductCard = ({
-    product,
-    selectedProduct,
-    handleOpen,
-    handleClose
-}) => {
+const ProductCard = ({ product, selectedProduct, handleOpen, handleClose }) => {
     if (!product) return null;
 
     const isOverlayVisible = selectedProduct?.id === product.id;
-
     const { addToCart } = useCart();
 
     const handleAddToCart = (e) => {
@@ -29,7 +23,6 @@ const ProductCard = ({
                 className="w-[170px] sm:w-[180px] rounded-md overflow-hidden bg-[#D4ECE0] shadow border hover:shadow-lg cursor-pointer transition"
                 onClick={(e) => {
                     e.stopPropagation();
-                    console.log('open product', product.id);
                     handleOpen(product);
                 }}
             >
@@ -51,7 +44,10 @@ const ProductCard = ({
                         {product.name}
                     </div>
                     <div className="text-red-400 text-[0.7rem]">
-                        Phân loại: {product.type}
+                        Phân loại: {product.category}
+                    </div>
+                    <div className="text-yellow-500 text-[0.7rem]">
+                        ⭐ {product.rate}/5
                     </div>
                 </div>
             </div>
@@ -59,13 +55,11 @@ const ProductCard = ({
             {/* Overlay hiển thị chi tiết sản phẩm */}
             {isOverlayVisible && (
                 <OverlayPortal onClickOutside={handleClose}>
-                    <div
-                        onClick={(e) => e.stopPropagation()}
-                    >
+                    <div onClick={(e) => e.stopPropagation()}>
                         <ProductDetail
                             product={product}
                             onClose={handleClose}
-                            handleAddToCart={handleAddToCart} // 👈 gọi trực tiếp từ hook
+                            handleAddToCart={handleAddToCart}
                         />
                     </div>
                 </OverlayPortal>
@@ -80,8 +74,9 @@ ProductCard.propTypes = {
         name: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
-        type: PropTypes.string,
-        description: PropTypes.string
+        category: PropTypes.string,
+        description: PropTypes.string,
+        rate: PropTypes.number
     }),
     selectedProduct: PropTypes.object,
     handleOpen: PropTypes.func.isRequired,

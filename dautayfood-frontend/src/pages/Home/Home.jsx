@@ -1,17 +1,18 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
 import ProductCard from "../../components/common/ProductCard/ProductCard.jsx";
 import BigProductCard from "../../components/common/BigProductCard/BigProductCard.jsx";
 import HeroSection from "../../components/layout/HeroBanner/HeroBanner.jsx";
-import TypicalProducts from "../../Products/TypicalProduct.jsx";
-import ProductForBigCard from "../../Products/ProductForBigCard.jsx";
 import ScrollToTop from "../../ScrollToTop";
 import WhyChoose from "../../components/sections/WhyChoose/WhyChoose.jsx";
 import Feedback from "../../components/sections/Feedback/Feedback.jsx";
 import useSelectedProduct from "../../hooks/useSelectedProduct.jsx";
 import ImpressiveStats from "../../components/sections/ImpressiveStats/ImpressiveStats.jsx";
+import useProducts from '../../hooks/useProducts.jsx';
 
 function Home() {
   const { selectedProduct, handleOpen, handleClose } = useSelectedProduct();
+  const { latestProducts, bestSellingProducts, loading } = useProducts();
+
   const whyChooseRef = useRef(null);
   const feedbackRef = useRef(null);
 
@@ -30,6 +31,8 @@ function Home() {
 
     return () => observer.disconnect();
   }, []);
+
+  if (loading) return <p className="text-center py-10">Đang tải sản phẩm...</p>;
 
   return (
     <div className="w-full transition-colors duration-300 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100">
@@ -69,17 +72,17 @@ function Home() {
           <WhyChoose />
         </div>
 
-        {/* Typical Products */}
+        {/* Latest Products */}
         <section className="fade-in-card py-0 px-4 md:px-8 bg-white dark:bg-gray-900">
           <div className="flex flex-col items-center my-5">
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-600 via-red-500 to-pink-500 bg-clip-text text-transparent mb-4 lg:py-10">
-              Món ngon đề xuất cho bạn
+              Món ngon mới nhất
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-red-400 to-pink-400 mx-auto rounded-full"></div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 w-fit mx-auto">
-            {TypicalProducts.map((product) => (
+            {latestProducts.map((product) => (
               <ProductCard
                 key={product.id}
                 product={product}
@@ -91,17 +94,17 @@ function Home() {
           </div>
         </section>
 
-        {/* Featured Products */}
+        {/* Best Selling Products */}
         <section className="fade-in-card py-0 px-4 md:px-8 bg-gray-50 dark:bg-gray-800">
           <div className="flex flex-col items-center my-5">
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-600 via-red-500 to-pink-500 bg-clip-text text-transparent mb-4 lg:py-10">
-              Tham khảo thêm...
+              Bán chạy nhất
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-red-400 to-pink-400 mx-auto rounded-full"></div>
           </div>
 
           <div className="flex flex-col gap-8 items-center">
-            {ProductForBigCard.map((product) => (
+            {bestSellingProducts.map((product) => (
               <BigProductCard
                 key={product.id}
                 product={product}

@@ -1,24 +1,47 @@
-import { createContext, useState } from "react";
+// src/context/UserContext.jsx
+import { createContext, useContext, useState } from "react";
+import { User as UserIcon } from "lucide-react"; // icon mặc định
 
+// 1. Tạo context
 const UserContext = createContext();
 
-const initialData = {
-    userID: "123456789",
-    loginName: "ChinhNguyen1152k5",
-    email: "Chinhnguyen115@gmail.com",
-    phone: "123456789",
-    gender: "Nam",
-    day: "11",
-    month: "05",
-    year: "2005",
-};
-
+// 2. Provider
 export const UserProvider = ({ children }) => {
-    const [profileData, setProfileData] = useState(initialData);
+    const [profileData, setProfileData] = useState({
+        userID: null,
+        loginName: "Khách",
+        role: "guest", // guest | user | admin
+    });
+
     const [avatarImage, setAvatarImage] = useState(null);
 
-    const getInitialAvatar = () =>
-        profileData.loginName.charAt(0).toUpperCase();
+    // avatar cho guest → icon mặc định
+    const getInitialAvatar = () => {
+        if (profileData.role === "guest") {
+            return <UserIcon className="w-fit h-auto text-white" />;
+        }
+        if (avatarImage) return avatarImage;
+        if (profileData?.loginName) return profileData.loginName[0].toUpperCase();
+        return "?";
+    };
+
+    const login = (user) => {
+        setProfileData({
+            userID: user.id,
+            loginName: user.name,
+            role: user.role, // "user" hoặc "admin"
+        });
+        setAvatarImage(user.avatar || null);
+    };
+
+    const logout = () => {
+        setProfileData({
+            userID: null,
+            loginName: "Khách",
+            role: "guest",
+        });
+        setAvatarImage(null);
+    };
 
     return (
         <UserContext.Provider
@@ -28,11 +51,15 @@ export const UserProvider = ({ children }) => {
                 avatarImage,
                 setAvatarImage,
                 getInitialAvatar,
+                login,
+                logout,
             }}
         >
             {children}
         </UserContext.Provider>
     );
 };
+
+export const useUser = () => useContext(UserContext);
 
 export default UserContext;

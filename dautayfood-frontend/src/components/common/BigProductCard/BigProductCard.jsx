@@ -10,10 +10,11 @@ import { toast } from "react-hot-toast";
 const BigProductCard = ({ product, selectedProduct, handleOpen, handleClose }) => {
     const { addToCart } = useCart();
     const showDetail = selectedProduct?.id === product.id;
-    const handleAddToCart = () => {
-        addToCart(product, 1, '');
+
+    const handleAddToCart = (e) => {
+        e?.stopPropagation();
+        addToCart(product, 1);
         toast.success("Đã thêm vào giỏ hàng!");
-        onClose();
     };
 
     return (
@@ -54,7 +55,7 @@ const BigProductCard = ({ product, selectedProduct, handleOpen, handleClose }) =
                             <div className="flex items-center gap-2">
                                 <Star size={20} className="text-yellow-400 fill-yellow-400" />
                                 <span className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                                    {product.rating}
+                                    {product.rate}
                                 </span>
                                 <span className="text-gray-500 dark:text-gray-400">/5</span>
                             </div>
@@ -79,7 +80,7 @@ const BigProductCard = ({ product, selectedProduct, handleOpen, handleClose }) =
                             >
                                 Thử ngay
                             </ButtonTry>
-                            <ButtonCart onClick={() => handleAddToCart(product)}>
+                            <ButtonCart onClick={handleAddToCart}>
                                 Thêm vào giỏ hàng
                             </ButtonCart>
                         </div>
@@ -115,7 +116,7 @@ const BigProductCard = ({ product, selectedProduct, handleOpen, handleClose }) =
                     <div className="flex items-center gap-2">
                         <Star size={18} className="text-yellow-400 fill-yellow-400" />
                         <span className="font-semibold text-gray-900 dark:text-gray-100">
-                            {product.rating}/5
+                            {product.rate}/5
                         </span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
@@ -137,9 +138,7 @@ const BigProductCard = ({ product, selectedProduct, handleOpen, handleClose }) =
                     >
                         Thử ngay
                     </ButtonTry>
-                    <ButtonCart onClick={() => addToCart(product)} >
-                        Thêm vào giỏ hàng
-                    </ButtonCart>
+                    <ButtonCart onClick={handleAddToCart}>Thêm vào giỏ hàng</ButtonCart>
                 </div>
             </div>
 

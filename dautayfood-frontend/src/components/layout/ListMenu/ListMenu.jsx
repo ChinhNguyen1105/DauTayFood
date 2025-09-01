@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import FilterTabs from "../../ui/FilterTabs/FilterTabs";
 import ProductCard from "../../common/ProductCard/ProductCard";
 
 const ListMenu = ({
@@ -24,8 +23,9 @@ const ListMenu = ({
     };
 
     const filteredProducts = Products.filter((product) => {
+        // Lọc theo category thay vì type
         const matchType =
-            selectedType === "tat-ca" || product.type === selectedType;
+            selectedType === "tat-ca" || product.category.toLowerCase().replace(/\s+/g, "-") === selectedType;
 
         const normalizedSearch = normalizeText(searchTerm);
         const normalizedName = normalizeText(product.name);
@@ -42,33 +42,24 @@ const ListMenu = ({
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentProducts = filteredProducts.slice(
-        indexOfFirstItem,
-        indexOfLastItem
-    );
+    const currentProducts = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
 
     useEffect(() => {
         setCurrentPage(1);
     }, [selectedType, searchTerm]);
 
     const handlePrev = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
+        if (currentPage > 1) setCurrentPage(currentPage - 1);
     };
 
     const handleNext = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
-        }
+        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
     };
 
     return (
         <div className="max-w-[1200px] mx-auto p-5 font-sans">
             {/* Product Grid */}
-            <div
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-10 justify-items-center items-center"
-            >
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-10 justify-items-center items-center">
                 {currentProducts.length === 0 ? (
                     <p className="text-center text-gray-600 text-lg col-span-full py-10">
                         Không tìm thấy sản phẩm phù hợp.
@@ -79,7 +70,7 @@ const ListMenu = ({
                             key={product.id}
                             product={product}
                             selectedProduct={selectedProduct}
-                            handleAddToCart={handleAddToCart}
+                            handleAddToCart={handleAddToCart} // dùng props nếu cần
                             handleOpen={handleOpen}
                             handleClose={handleClose}
                         />
@@ -88,7 +79,7 @@ const ListMenu = ({
             </div>
 
             {/* Pagination */}
-            <div className="flex flex-row sm:flex-row justify-center items-center gap-5 mt-10">
+            <div className="flex flex-row justify-center items-center gap-5 mt-10">
                 <button
                     onClick={handlePrev}
                     disabled={currentPage === 1}
